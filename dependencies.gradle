@@ -15,4 +15,5 @@ ext.versions = [
         androidx          : '1.0.2',
 
         material          : '1.1.0-alpha07',
+        timber              : '4.7.1'
 ]

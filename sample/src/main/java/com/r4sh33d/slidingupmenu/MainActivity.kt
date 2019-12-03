@@ -18,17 +18,37 @@ package com.r4sh33d.slidingupmenu
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.animation.AccelerateInterpolator
+import android.widget.PopupMenu
 import com.r4sh33d.R
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        testMenu()
+    }
+
+    private fun testMenu() {
+        val popupMenu = PopupMenu(this, null)
+        val menuInflater = MenuInflater(this)
+        val menu = popupMenu.menu
+        menuInflater.inflate(R.menu.landing_page_menu, menu)
+
+        // Now try to print
+
+        for (index in 0 until menu.size()) {
+            val menuItem = menu.getItem(index)
+            Timber.d("MenuName: ${menuItem.title}, MenuTitle: ${menuItem.itemId}")
+        }
     }
 
 }
