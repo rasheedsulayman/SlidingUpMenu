@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            SlidingUpMenu(this, R.menu.landing_page_menu).show()
+            SlidingUpMenu(this, "Text title", R.menu.landing_page_menu).show()
         }
     }
 }

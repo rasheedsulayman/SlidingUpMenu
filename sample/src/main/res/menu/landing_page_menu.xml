@@ -3,6 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_abouttt"
+        android:title="About"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_feedbackkk"
+        android:title="Send Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_rateee"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_licencessss"
+        android:title="Licences"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_aboutttt"
+        android:title="About"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_feedbackkkk"
+        android:title="Send Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_rateeee"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_licencesss"
+        android:title="Licences"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/menu_aboutt"
+        android:title="About"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_feedbackk"
+        android:title="Send Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_ratee"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_licencess"
+        android:title="Licences"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_about"
         android:title="About"
         app:showAsAction="never" />

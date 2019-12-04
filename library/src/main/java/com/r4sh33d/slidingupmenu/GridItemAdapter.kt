@@ -1,9 +1,11 @@
 package com.r4sh33d.slidingupmenu
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,8 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
     }
 
     inner class GridItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val iconImageView = itemView.findViewById<WidthFitSquareImageView>(R.id.iconImageView)
+        private val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
 
         init {
             itemView.setOnClickListener {
@@ -42,7 +46,11 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
             }
         }
 
-        fun bind(breed: MenuItem) {
+        fun bind(menuItem: MenuItem) {
+            titleTextView.text = menuItem.title
+            if (menuItem.icon != null) {
+                iconImageView.setImageDrawable(menuItem.icon)
+            } else Log.d("TAG", "Menu icon is null")
         }
     }
 }
