@@ -4,9 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 
-class HeightFitSquareImageView(context: Context, attrs: AttributeSet?) :
+class WidthFitSquareImageView(context: Context, attrs: AttributeSet?) :
     AppCompatImageView(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) =
-        super.onMeasure(heightMeasureSpec, heightMeasureSpec)
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
 }
