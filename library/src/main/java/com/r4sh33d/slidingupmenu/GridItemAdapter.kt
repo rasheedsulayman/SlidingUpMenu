@@ -14,7 +14,7 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
         return GridItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.menu_item_grid,
+                R.layout.menu_item_grid_layout,
                 parent,
                 false
             )
@@ -35,6 +35,7 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
     }
 
     inner class GridItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         init {
             itemView.setOnClickListener {
                 menuItemClickListener(getItem(adapterPosition))
