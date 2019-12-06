@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 @SuppressLint("ViewConstructor")
 class MenuRecyclerView(
     context: Context,
-    private val menuItems: ArrayList<MenuItem>
+    private val menuItems: List<MenuItem>
 ) : RecyclerView(context) {
 
     init {
