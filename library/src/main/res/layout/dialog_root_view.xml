@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingStart="16dp"
     android:paddingTop="16dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+    android:paddingEnd="16dp">
 
     <TextView
         android:id="@+id/dialogTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
@@ -24,21 +24,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.viewpager.widget.ViewPager
+        <com.r4sh33d.slidingupmenu.WrapContentViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabLayout
-            app:tabPaddingEnd="8dp"
-            app:tabPaddingStart="8dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginTop="8dp"
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="16dp"
+            android:layout_marginBottom="6dp"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"
             app:tabIndicatorGravity="bottom"
-            app:tabIndicatorHeight="0dp" />
+            app:tabIndicatorHeight="0dp"
+            app:tabPaddingEnd="8dp"
+            app:tabPaddingStart="8dp" />
     </LinearLayout>
 </LinearLayout>

@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.annotation.MenuRes
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import kotlin.math.abs
@@ -24,7 +23,7 @@ class SlidingUpMenu(
     private val dialogRootView =
         LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
-    private val viewPager = dialogRootView.findViewById<ViewPager>(R.id.view_pager)
+    private val viewPager = dialogRootView.findViewById<WrapContentViewPager>(R.id.view_pager)
     private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
 
     init {
@@ -33,21 +32,28 @@ class SlidingUpMenu(
         setContentView(dialogRootView)
         dialogRootView.onGlobalLayout {
             behavior.peekHeight = dialogRootView.height
+            logMessage("dialog height: ${dialogRootView.height}")
         }
     }
 
     private fun setUpWindowBackground() {
-        val marginLeftRight = context.getScreenSizePx().run {
+        val marginLeftRight = windowContext.getScreenSizePx().run {
             if (width == min(width, height)) 0 else ((0.8 * abs(width - height)) / 2).toInt()
         }
-        val inset =
-            InsetDrawable(ColorDrawable(Color.TRANSPARENT), marginLeftRight, 0, marginLeftRight, 0)
+        val inset = InsetDrawable(
+            ColorDrawable(Color.TRANSPARENT),
+            marginLeftRight,
+            0,
+            marginLeftRight,
+            0
+        )
         window!!.setBackgroundDrawable(inset)
     }
 
     private fun setUpViews() {
         titleTextView.text = title
-        viewPager.adapter = ViewPagerAdapter(windowContext, splitMenuList(context.getMenuList(menuResource)))
+        viewPager.adapter =
+            ViewPagerAdapter(windowContext, splitMenuList(context.getMenuList(menuResource)))
         tabLayout.setupWithViewPager(viewPager, true)
     }
 

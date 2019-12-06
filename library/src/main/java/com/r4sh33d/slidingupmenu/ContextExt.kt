@@ -9,14 +9,14 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import kotlin.math.roundToInt
 
-fun Context.getScreenSizeDp(): SizeFloat {
+internal fun Context.getScreenSizeDp(): SizeFloat {
     val displayMetrics: DisplayMetrics = resources.displayMetrics
     val dpHeight = displayMetrics.heightPixels / displayMetrics.density
     val dpWidth = displayMetrics.widthPixels / displayMetrics.density
     return SizeFloat(dpHeight, dpWidth)
 }
 
-fun Context.dpToPx(dp: Int): Int {
+internal fun Context.dpToPx(dp: Int): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics
     ).roundToInt()

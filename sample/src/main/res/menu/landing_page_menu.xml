@@ -8,7 +8,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_feedbackkk"
-        android:title="Send Feedback"
+        android:title="Send Feedback Fedbacck"
         app:showAsAction="never" />
 
     <item
