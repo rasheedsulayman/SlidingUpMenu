@@ -2,8 +2,8 @@ package com.r4sh33d.slidingupmenu
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,10 +23,9 @@ class MenuRecyclerView(
             override fun canScrollHorizontally(): Boolean = false
             override fun canScrollVertically(): Boolean = false
         }
-
         addItemDecoration(GridSpacingItemDecoration(4, context.dpToPx(4)))
         adapter = GridItemAdapter {
-            Log.d("SlidingUpMenu", "Menu item clicked: ${it.title}")
+            Toast.makeText(context, "Item clicked with name: ${it.title}", Toast.LENGTH_LONG).show()
         }.apply { submitList(menuItems) }
     }
 }
