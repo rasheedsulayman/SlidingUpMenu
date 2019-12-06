@@ -22,7 +22,7 @@ internal fun Context.dpToPx(dp: Int): Int {
     ).roundToInt()
 }
 
-fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuItem> {
+internal fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuItem> {
     return PopupMenu(this, null).menu.run {
         MenuInflater(this@getMenuList).inflate(menuRes, this)
         val list = ArrayList<MenuItem>()
@@ -33,7 +33,7 @@ fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuItem> {
     }
 }
 
-fun Context.getScreenSizePx(): SizeInt {
+internal fun Context.getScreenSizePx(): SizeInt {
     val displayMetrics = resources.displayMetrics
     return SizeInt(displayMetrics.heightPixels, displayMetrics.widthPixels)
 }
