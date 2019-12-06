@@ -6,15 +6,12 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
 import androidx.annotation.MenuRes
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlin.math.abs
 import kotlin.math.min
-
 
 class SlidingUpMenu(
     private val windowContext: Context,
@@ -22,10 +19,10 @@ class SlidingUpMenu(
     @MenuRes private val menuResource: Int
 ) : BottomSheetDialog(windowContext) {
     val TAG = "SlidingUpMenu"
-    private val dialogRootView: View =
+    private val dialogRootView =
         LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
-    private val recyclerView = dialogRootView.findViewById<RecyclerView>(R.id.recyclerView)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
+    private val viewPager = dialogRootView.findViewById<ViewPager>(R.id.view_pager)
 
     init {
         setUpWindowBackground()
@@ -46,11 +43,6 @@ class SlidingUpMenu(
 
     private fun setUpViews() {
         titleTextView.text = title
-        recyclerView.layoutManager = GridLayoutManager(windowContext, 4)
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(4, windowContext.dpToPx(4)))
-        recyclerView.adapter = GridItemAdapter {
-            Log.d("SlidingUpMenu", "Menu item clicked: ${it.title}")
-        }.apply { submitList(windowContext.getMenuList(menuResource)) }
     }
 
     fun logMessage(message: String) {

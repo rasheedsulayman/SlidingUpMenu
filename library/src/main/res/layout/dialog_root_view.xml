@@ -7,18 +7,23 @@
     android:padding="16dp">
 
     <TextView
-        android:textColor="?android:textColorPrimary"
         android:id="@+id/dialogTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
         tools:text="Share" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp" />
+        android:layout_height="250dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
