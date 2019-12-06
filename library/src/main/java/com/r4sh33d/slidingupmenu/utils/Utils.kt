@@ -1,4 +1,4 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.utils
 
 import android.view.MenuItem
 

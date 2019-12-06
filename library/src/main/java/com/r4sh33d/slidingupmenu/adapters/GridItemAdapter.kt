@@ -1,4 +1,4 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,9 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.r4sh33d.slidingupmenu.R
+import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 
 class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
-    ListAdapter<MenuItem, GridItemAdapter.GridItemViewHolder>(DiffCallback) {
+    ListAdapter<MenuItem, GridItemAdapter.GridItemViewHolder>(
+        DiffCallback
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
         return GridItemViewHolder(
@@ -37,7 +41,9 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
     }
 
     inner class GridItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val iconImageView = itemView.findViewById<WidthFitSquareImageView>(R.id.iconImageView)
+        private val iconImageView = itemView.findViewById<WidthFitSquareImageView>(
+            R.id.iconImageView
+        )
         private val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
 
         init {

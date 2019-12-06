@@ -6,7 +6,7 @@
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <com.r4sh33d.slidingupmenu.WidthFitSquareImageView
+    <com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
         android:layout_margin="12dp"
         android:background="@android:color/holo_green_light"
         android:id="@+id/iconImageView"

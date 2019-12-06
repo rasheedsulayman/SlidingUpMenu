@@ -1,4 +1,4 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.extensions
 
 import android.content.Context
 import android.util.DisplayMetrics
@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
+import com.r4sh33d.slidingupmenu.utils.SizeFloat
+import com.r4sh33d.slidingupmenu.utils.SizeInt
 import kotlin.math.roundToInt
 
 internal fun Context.getScreenSizeDp(): SizeFloat {
@@ -35,5 +37,8 @@ internal fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuItem> {
 
 internal fun Context.getScreenSizePx(): SizeInt {
     val displayMetrics = resources.displayMetrics
-    return SizeInt(displayMetrics.heightPixels, displayMetrics.widthPixels)
+    return SizeInt(
+        displayMetrics.heightPixels,
+        displayMetrics.widthPixels
+    )
 }

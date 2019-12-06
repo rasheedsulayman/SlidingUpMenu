@@ -1,4 +1,4 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.views
 
 import android.content.Context
 import android.util.AttributeSet

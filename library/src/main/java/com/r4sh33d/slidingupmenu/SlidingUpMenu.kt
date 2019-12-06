@@ -10,6 +10,12 @@ import android.widget.TextView
 import androidx.annotation.MenuRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
+import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
+import com.r4sh33d.slidingupmenu.extensions.getMenuList
+import com.r4sh33d.slidingupmenu.extensions.getScreenSizePx
+import com.r4sh33d.slidingupmenu.extensions.onGlobalLayout
+import com.r4sh33d.slidingupmenu.utils.splitMenuList
+import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -53,7 +59,12 @@ class SlidingUpMenu(
     private fun setUpViews() {
         titleTextView.text = title
         viewPager.adapter =
-            ViewPagerAdapter(windowContext, splitMenuList(context.getMenuList(menuResource)))
+            ViewPagerAdapter(
+                windowContext,
+                splitMenuList(
+                    context.getMenuList(menuResource)
+                )
+            )
         tabLayout.setupWithViewPager(viewPager, true)
     }
 

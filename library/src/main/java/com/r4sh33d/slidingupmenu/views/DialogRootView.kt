@@ -1,9 +1,10 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
+import com.r4sh33d.slidingupmenu.extensions.getScreenSizePx
 import kotlin.math.min
 
 class DialogRootView(context: Context, attrs: AttributeSet?) :

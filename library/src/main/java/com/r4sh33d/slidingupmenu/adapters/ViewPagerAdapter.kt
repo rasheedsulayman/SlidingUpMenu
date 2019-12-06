@@ -1,10 +1,11 @@
-package com.r4sh33d.slidingupmenu
+package com.r4sh33d.slidingupmenu.adapters
 
 import android.content.Context
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
+import com.r4sh33d.slidingupmenu.views.MenuRecyclerView
 
 class ViewPagerAdapter(
     private val context: Context,
@@ -16,7 +17,10 @@ class ViewPagerAdapter(
     override fun getCount(): Int = groupedMenuItemsList.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val recyclerView = MenuRecyclerView(context, groupedMenuItemsList[position])
+        val recyclerView = MenuRecyclerView(
+            context,
+            groupedMenuItemsList[position]
+        )
         container.addView(recyclerView)
         return recyclerView
     }
