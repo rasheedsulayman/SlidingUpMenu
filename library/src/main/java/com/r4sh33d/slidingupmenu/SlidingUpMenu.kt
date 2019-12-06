@@ -10,8 +10,10 @@ import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.tabs.TabLayout
 import kotlin.math.abs
 import kotlin.math.min
+
 
 class SlidingUpMenu(
     private val windowContext: Context,
@@ -23,6 +25,7 @@ class SlidingUpMenu(
         LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
     private val viewPager = dialogRootView.findViewById<ViewPager>(R.id.view_pager)
+    private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
 
     init {
         setUpWindowBackground()
@@ -37,12 +40,15 @@ class SlidingUpMenu(
         val marginLeftRight = context.getScreenSizePx().run {
             if (width == min(width, height)) 0 else ((0.8 * abs(width - height)) / 2).toInt()
         }
-        val inset = InsetDrawable(ColorDrawable(Color.TRANSPARENT), marginLeftRight, 0, marginLeftRight, 0)
+        val inset =
+            InsetDrawable(ColorDrawable(Color.TRANSPARENT), marginLeftRight, 0, marginLeftRight, 0)
         window!!.setBackgroundDrawable(inset)
     }
 
     private fun setUpViews() {
         titleTextView.text = title
+        viewPager.adapter = ViewPagerAdapter(windowContext, splitMenuList(context.getMenuList(menuResource)))
+        tabLayout.setupWithViewPager(viewPager, true)
     }
 
     fun logMessage(message: String) {
