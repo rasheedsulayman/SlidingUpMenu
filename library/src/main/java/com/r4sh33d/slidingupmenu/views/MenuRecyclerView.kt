@@ -9,12 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.r4sh33d.slidingupmenu.adapters.GridItemAdapter
 import com.r4sh33d.slidingupmenu.utils.GridSpacingItemDecoration
 import com.r4sh33d.slidingupmenu.extensions.dpToPx
+import com.r4sh33d.slidingupmenu.utils.MenuType
+import com.r4sh33d.slidingupmenu.utils.MenuType.*
 
 @SuppressLint("ViewConstructor")
 class MenuRecyclerView(
     context: Context,
     private val menuItems: List<MenuItem>
 ) : RecyclerView(context) {
+
+    private var menuType = GRID
+    private var scrollDirection = HORIZONTAL
+
 
     init {
         setUpViews()
@@ -26,6 +32,7 @@ class MenuRecyclerView(
             override fun canScrollHorizontally(): Boolean = false
             override fun canScrollVertically(): Boolean = false
         }
+
         addItemDecoration(
             GridSpacingItemDecoration(
                 4,
