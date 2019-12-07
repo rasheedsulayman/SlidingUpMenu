@@ -14,6 +14,9 @@ import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
 import com.r4sh33d.slidingupmenu.extensions.getMenuList
 import com.r4sh33d.slidingupmenu.extensions.getScreenSizePx
 import com.r4sh33d.slidingupmenu.extensions.onGlobalLayout
+import com.r4sh33d.slidingupmenu.utils.MenuModel
+import com.r4sh33d.slidingupmenu.utils.MenuType
+import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import com.r4sh33d.slidingupmenu.utils.splitMenuList
 import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
@@ -23,7 +26,8 @@ import kotlin.math.min
 class SlidingUpMenu(
     private val windowContext: Context,
     private var title: String,
-    @MenuRes private val menuResource: Int
+    @MenuRes menuResource: Int? = null,
+    menuModelItems: MutableList<MenuModel>? = null
 ) : BottomSheetDialog(windowContext) {
     val TAG = "SlidingUpMenu"
     private val dialogRootView =
@@ -32,17 +36,11 @@ class SlidingUpMenu(
     private val viewPager = dialogRootView.findViewById<WrapContentViewPager>(R.id.view_pager)
     private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
 
-    init {
-        setUpWindowBackground()
-        setUpViews()
-        setContentView(dialogRootView)
-        dialogRootView.onGlobalLayout {
-            behavior.peekHeight = dialogRootView.height
-            logMessage("dialog height: ${dialogRootView.height}")
-        }
-    }
+    private var menuType = MenuType.GRID
+    private var scrollDirection = ScrollDirection.HORIZONTAL
+    private val menuItemsList = ArrayList<MenuModel>()
 
-    private fun setUpWindowBackground() {
+    init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
             if (width == min(width, height)) 0 else ((0.8 * abs(width - height)) / 2).toInt()
         }
@@ -54,18 +52,44 @@ class SlidingUpMenu(
             0
         )
         window!!.setBackgroundDrawable(inset)
+
+        //Try to build the menu list
+        if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
+        if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
+        if (menuItemsList.size < 1) throw IllegalArgumentException(
+            "No menu item(s) to work with." +
+                    "Please specify items with a menu resource and/or supply MenuModel list to SlidingUpMenu constructor"
+        )
+    }
+
+    private fun configureScreen() {
+        setUpViews()
+        setContentView(dialogRootView)
+        dialogRootView.onGlobalLayout {
+            behavior.peekHeight = dialogRootView.height
+            logMessage("dialog height: ${dialogRootView.height}")
+        }
     }
 
     private fun setUpViews() {
         titleTextView.text = title
-        viewPager.adapter =
-            ViewPagerAdapter(
-                windowContext,
-                splitMenuList(
-                    context.getMenuList(menuResource)
-                )
-            )
+        viewPager.adapter = ViewPagerAdapter(
+            windowContext,
+            splitMenuList(menuItemsList, scrollDirection),
+            menuType,
+            scrollDirection
+        )
         tabLayout.setupWithViewPager(viewPager, true)
+    }
+
+    fun menuType(menuType: MenuType): SlidingUpMenu {
+        this.menuType = menuType
+        return this
+    }
+
+    fun scrollDirection(scrollDirection: ScrollDirection): SlidingUpMenu {
+        this.scrollDirection = scrollDirection
+        return this
     }
 
     fun logMessage(message: String) {

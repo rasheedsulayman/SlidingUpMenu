@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
+import com.r4sh33d.slidingupmenu.utils.MenuModel
 import com.r4sh33d.slidingupmenu.utils.SizeFloat
 import com.r4sh33d.slidingupmenu.utils.SizeInt
 import kotlin.math.roundToInt
@@ -24,12 +25,12 @@ internal fun Context.dpToPx(dp: Int): Int {
     ).roundToInt()
 }
 
-internal fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuItem> {
+internal fun Context.getMenuList(@MenuRes menuRes: Int): ArrayList<MenuModel> {
     return PopupMenu(this, null).menu.run {
         MenuInflater(this@getMenuList).inflate(menuRes, this)
-        val list = ArrayList<MenuItem>()
+        val list = ArrayList<MenuModel>()
         for (index in 0 until size()) {
-            list.add(getItem(index))
+            list.add(MenuModel(getItem(index)))
         }
         list
     }

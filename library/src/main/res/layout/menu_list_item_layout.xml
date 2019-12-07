@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:layout_marginEnd="16dp"
+        android:id="@+id/iconImageView"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:background="@android:color/holo_green_light" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="20sp"
+        tools:text="Guess it" />
+
+</LinearLayout>

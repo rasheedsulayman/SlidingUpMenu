@@ -1,8 +1,6 @@
 package com.r4sh33d.slidingupmenu.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,17 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.r4sh33d.slidingupmenu.R
+import com.r4sh33d.slidingupmenu.extensions.show
+import com.r4sh33d.slidingupmenu.utils.MenuModel
+import com.r4sh33d.slidingupmenu.utils.MenuType
+import com.r4sh33d.slidingupmenu.utils.MenuType.GRID
 import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 
-class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
-    ListAdapter<MenuItem, GridItemAdapter.GridItemViewHolder>(
-        DiffCallback
-    ) {
+class MenuModelAdapter(
+    private val menuType: MenuType,
+    private val menuItemClickListener: (MenuModel) -> Unit
+) :
+    ListAdapter<MenuModel, MenuModelAdapter.GridItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
         return GridItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.menu_item_grid_layout,
+                if (menuType == GRID) R.layout.menu_item_grid_layout else R.layout.menu_list_item_layout,
                 parent,
                 false
             )
@@ -31,13 +34,13 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MenuItem>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<MenuModel>() {
 
-        override fun areItemsTheSame(oldItem: MenuItem, newItem: MenuItem): Boolean =
+        override fun areItemsTheSame(oldItem: MenuModel, newItem: MenuModel): Boolean =
             oldItem === newItem
 
-        override fun areContentsTheSame(oldItem: MenuItem, newItem: MenuItem): Boolean =
-            oldItem.itemId == newItem.itemId
+        override fun areContentsTheSame(oldItem: MenuModel, newItem: MenuModel): Boolean =
+            oldItem.id == newItem.id
     }
 
     inner class GridItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -52,11 +55,12 @@ class GridItemAdapter(val menuItemClickListener: (MenuItem) -> Unit) :
             }
         }
 
-        fun bind(menuItem: MenuItem) {
-            titleTextView.text = menuItem.title
-            if (menuItem.icon != null) {
-                iconImageView.setImageDrawable(menuItem.icon)
-            } else Log.d("TAG", "Menu icon is null")
+        fun bind(menuModel: MenuModel) {
+            titleTextView.text = menuModel.title
+            if (menuModel.iconDrawable != null) {
+                iconImageView.show()
+                iconImageView.setImageDrawable(menuModel.iconDrawable)
+            }
         }
     }
 }
