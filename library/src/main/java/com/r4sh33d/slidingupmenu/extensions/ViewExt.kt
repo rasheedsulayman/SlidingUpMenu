@@ -1,12 +1,15 @@
 package com.r4sh33d.slidingupmenu.extensions
 
+import android.content.Context
+import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -26,19 +29,65 @@ internal inline fun View.onGlobalLayout(crossinline block: () -> Unit) {
     })
 }
 
-
 internal fun TextView.saveSetText(
-    text: String? = null,
-    @StringRes titleRes: Int? = null
+    @StringRes textRes: Int? = null,
+    text: String? = null
 ) {
-    val newText = text ?: if (titleRes != null) context.getString(titleRes) else null
-    if (newText != null) setText(newText)
+    getTextString(context, textRes, text)?.let {
+        setText(it)
+    }
 }
 
 internal fun TextView.saveSetTextColor(
-    @ColorInt color: Int? = null,
-    @ColorRes colorRes: Int? = null
+    @ColorRes colorRes: Int? = null,
+    @ColorInt color: Int? = null
 ) {
-    val newColor = color ?: if (colorRes != null) ContextCompat.getColor(context, colorRes) else null
-    if (newColor != null) setTextColor(newColor)
+    getColor(context, colorRes, color)?.let {
+        setTextColor(it)
+    }
+}
+
+internal fun ImageView.saveSetIconDrawable(
+    @DrawableRes iconDrawableRes: Int? = null,
+    iconDrawable: Drawable? = null
+) {
+    getDrawableAsset(context, iconDrawableRes, iconDrawable)?.let {
+        setImageDrawable(it)
+        show()
+    }
+}
+
+internal fun TextView.saveSetTypeFace(@FontRes fontRes: Int? = null, font: Typeface? = null) {
+    getFont(context, fontRes, font)?.let {
+        typeface = it
+    }
+}
+
+internal fun getFont(
+    context: Context, @FontRes fontRes: Int? = null,
+    font: Typeface? = null
+): Typeface? = font ?: if (fontRes != null) ResourcesCompat.getFont(context, fontRes) else null
+
+internal fun getColor(
+    context: Context,
+    @ColorRes colorRes: Int? = null,
+    @ColorInt color: Int? = null
+): Int? = color ?: if (colorRes != null) ContextCompat.getColor(context, colorRes) else null
+
+internal fun getDrawableAsset(
+    context: Context, @DrawableRes iconDrawableRes: Int? = null,
+    iconDrawable: Drawable? = null
+): Drawable? {
+    return iconDrawable ?: if (iconDrawableRes != null) ContextCompat.getDrawable(
+        context,
+        iconDrawableRes
+    ) else null
+}
+
+internal fun getTextString(
+    context: Context,
+    @StringRes titleRes: Int? = null,
+    text: String? = null
+): String? {
+    return text ?: if (titleRes != null) context.getString(titleRes) else null
 }
