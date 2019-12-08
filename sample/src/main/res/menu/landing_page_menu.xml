@@ -79,4 +79,33 @@
         android:title="Licences"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_rateeeee"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_licenecessss"
+        android:title="Licences"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_aboutttwt"
+        android:title="About"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_feedbacck"
+        android:title="Send Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_rateeeeee"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_licencesssee"
+        android:title="Licences"
+        app:showAsAction="never" />
+
 </menu>

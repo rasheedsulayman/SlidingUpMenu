@@ -6,8 +6,10 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.MenuRes
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
@@ -33,9 +35,9 @@ class SlidingUpMenu(
     private val dialogRootView =
         LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
-    private val viewPager = dialogRootView.findViewById<WrapContentViewPager>(R.id.view_pager)
     private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
-
+    private val viewPagerContainerLinearLayout =
+        dialogRootView.findViewById<LinearLayout>(R.id.viewPagerContainerLinearLayout)
     private var menuType = MenuType.GRID
     private var scrollDirection = ScrollDirection.HORIZONTAL
     private val menuItemsList = ArrayList<MenuModel>()
@@ -52,7 +54,6 @@ class SlidingUpMenu(
             0
         )
         window!!.setBackgroundDrawable(inset)
-
         //Try to build the menu list
         if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
@@ -65,13 +66,17 @@ class SlidingUpMenu(
     private fun configureScreen() {
         setUpViews()
         setContentView(dialogRootView)
-        dialogRootView.onGlobalLayout {
-            behavior.peekHeight = dialogRootView.height
-            logMessage("dialog height: ${dialogRootView.height}")
+        if (scrollDirection == ScrollDirection.HORIZONTAL) {
+            dialogRootView.onGlobalLayout {
+                behavior.peekHeight = dialogRootView.height
+                logMessage("dialog height: ${dialogRootView.height}")
+            }
         }
     }
 
     private fun setUpViews() {
+        val viewPager = WrapContentViewPager(windowContext, scrollDirection)
+        viewPagerContainerLinearLayout.addView(viewPager, 0)
         titleTextView.text = title
         viewPager.adapter = ViewPagerAdapter(
             windowContext,
@@ -90,6 +95,11 @@ class SlidingUpMenu(
     fun scrollDirection(scrollDirection: ScrollDirection): SlidingUpMenu {
         this.scrollDirection = scrollDirection
         return this
+    }
+
+    override fun show() {
+        configureScreen()
+        super.show()
     }
 
     fun logMessage(message: String) {

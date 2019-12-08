@@ -24,6 +24,8 @@ import android.view.MenuItem
 import android.view.animation.AccelerateInterpolator
 import android.widget.PopupMenu
 import com.r4sh33d.R
+import com.r4sh33d.slidingupmenu.utils.MenuType
+import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import java.text.DecimalFormat
@@ -35,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            SlidingUpMenu(this, "Text title", R.menu.landing_page_menu).show()
+            SlidingUpMenu(this, "Text title", R.menu.landing_page_menu)
+                .menuType(MenuType.GRID)
+                .scrollDirection(ScrollDirection.HORIZONTAL)
+                .show()
         }
     }
 }

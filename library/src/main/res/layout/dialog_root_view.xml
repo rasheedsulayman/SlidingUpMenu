@@ -20,14 +20,10 @@
         tools:text="Share" />
 
     <LinearLayout
+        android:id="@+id/viewPagerContainerLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <com.r4sh33d.slidingupmenu.views.WrapContentViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabLayout
             android:layout_marginTop="8dp"
