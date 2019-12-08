@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import com.r4sh33d.slidingupmenu.utils.MenuModel

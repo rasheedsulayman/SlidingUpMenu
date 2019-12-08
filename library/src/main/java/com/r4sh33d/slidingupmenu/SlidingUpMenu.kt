@@ -2,13 +2,15 @@ package com.r4sh33d.slidingupmenu
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.MenuRes
+import androidx.annotation.*
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
@@ -31,7 +33,6 @@ class SlidingUpMenu(
     @MenuRes menuResource: Int? = null,
     menuModelItems: MutableList<MenuModel>? = null
 ) : BottomSheetDialog(windowContext) {
-    val TAG = "SlidingUpMenu"
     private val dialogRootView =
         LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
@@ -41,6 +42,8 @@ class SlidingUpMenu(
     private var menuType = MenuType.GRID
     private var scrollDirection = ScrollDirection.HORIZONTAL
     private val menuItemsList = ArrayList<MenuModel>()
+    private var viewPager: WrapContentViewPager
+
 
     init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
@@ -54,13 +57,29 @@ class SlidingUpMenu(
             0
         )
         window!!.setBackgroundDrawable(inset)
+
+        viewPager = WrapContentViewPager(windowContext, scrollDirection)
+        viewPagerContainerLinearLayout.addView(viewPager, 0)
+
         //Try to build the menu list
         if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
         if (menuItemsList.size < 1) throw IllegalArgumentException(
-            "No menu item(s) to work with." +
-                    "Please specify items with a menu resource and/or supply MenuModel list to SlidingUpMenu constructor"
+            "No menu item(s) to work with." + "Please specify items with a menu resource and/or supply MenuModel " +
+                    "list to SlidingUpMenu constructor"
         )
+    }
+
+    fun titleText(@StringRes titleRes: Int? = null, title: String? = null) {
+
+    }
+
+    fun titleColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null) {
+
+    }
+
+    fun icon(@DrawableRes iconDrawableRes: Int? = null, iconDrawable: Drawable? = null) {
+
     }
 
     private fun configureScreen() {
@@ -75,8 +94,6 @@ class SlidingUpMenu(
     }
 
     private fun setUpViews() {
-        val viewPager = WrapContentViewPager(windowContext, scrollDirection)
-        viewPagerContainerLinearLayout.addView(viewPager, 0)
         titleTextView.text = title
         viewPager.adapter = ViewPagerAdapter(
             windowContext,
@@ -103,6 +120,6 @@ class SlidingUpMenu(
     }
 
     fun logMessage(message: String) {
-        Log.d(TAG, message)
+        Log.d("SlidingUpMenu", message)
     }
 }
