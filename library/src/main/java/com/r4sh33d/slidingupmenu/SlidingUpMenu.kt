@@ -22,9 +22,8 @@ import com.r4sh33d.slidingupmenu.extensions.getMenuList
 import com.r4sh33d.slidingupmenu.extensions.getScreenSizePx
 import com.r4sh33d.slidingupmenu.extensions.onGlobalLayout
 import com.r4sh33d.slidingupmenu.extensions.saveSetText
-import com.r4sh33d.slidingupmenu.utils.MenuModel
-import com.r4sh33d.slidingupmenu.utils.MenuType
-import com.r4sh33d.slidingupmenu.utils.ScrollDirection
+import com.r4sh33d.slidingupmenu.utils.*
+import com.r4sh33d.slidingupmenu.utils.BodyTextStyle
 import com.r4sh33d.slidingupmenu.utils.splitMenuList
 import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
@@ -51,8 +50,11 @@ class SlidingUpMenu(
     private var menuType = MenuType.GRID
     private var scrollDirection = ScrollDirection.HORIZONTAL
     private val menuItemsList = ArrayList<MenuModel>()
-
     private var bodyColor: Int? = null
+    private val bodyTextStyle = BodyTextStyle()
+
+    var dismissMenuItemSelected: Boolean = true
+        internal set
 
     init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
@@ -78,25 +80,6 @@ class SlidingUpMenu(
         )
     }
 
-    fun titleText(@StringRes titleRes: Int? = null, title: String? = null): SlidingUpMenu {
-        titleTextView.saveSetText(titleRes, title)
-        return this
-    }
-
-    fun titleColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null) : SlidingUpMenu {
-        titleTextView.saveSetTextColor(colorRes, colorInt)
-        return this
-    }
-
-    fun icon(@DrawableRes iconDrawableRes: Int? = null, iconDrawable: Drawable? = null) : SlidingUpMenu {
-        iconImageView.saveSetIconDrawable(iconDrawableRes, iconDrawable)
-        return this
-    }
-
-    fun titleFont(@FontRes fontRes: Int? = null, font: Typeface){
-
-    }
-
     private fun configureScreen() {
         setUpViews()
         setContentView(dialogRootView)
@@ -113,7 +96,8 @@ class SlidingUpMenu(
             windowContext,
             splitMenuList(menuItemsList, scrollDirection),
             menuType,
-            scrollDirection
+            scrollDirection,
+            bodyTextStyle
         )
         tabLayout.setupWithViewPager(viewPager, true)
     }
@@ -131,6 +115,41 @@ class SlidingUpMenu(
     override fun show() {
         configureScreen()
         super.show()
+    }
+
+    fun dismissOnMenuItemSelected(value: Boolean): SlidingUpMenu {
+        dismissMenuItemSelected = value
+        return this
+    }
+
+    fun titleText(@StringRes titleRes: Int? = null, title: String? = null): SlidingUpMenu {
+        titleTextView.saveSetText(titleRes, title)
+        return this
+    }
+
+    fun titleColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
+        titleTextView.saveSetTextColor(colorRes, colorInt)
+        return this
+    }
+
+    fun icon(@DrawableRes iconDrawableRes: Int? = null, iconDrawable: Drawable? = null): SlidingUpMenu {
+        iconImageView.saveSetIconDrawable(iconDrawableRes, iconDrawable)
+        return this
+    }
+
+    fun titleFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
+        titleTextView.saveSetTypeFace(fontRes, font)
+        return this
+    }
+
+    fun bodyTextColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
+        bodyTextStyle.textColor = getColor(windowContext, colorRes, colorInt)
+        return this
+    }
+
+    fun bodyTextFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
+        bodyTextStyle.font = getFont(windowContext, fontRes, font)
+        return this
     }
 
     fun logMessage(message: String) {

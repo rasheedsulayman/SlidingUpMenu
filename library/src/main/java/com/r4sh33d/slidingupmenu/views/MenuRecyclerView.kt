@@ -8,17 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.r4sh33d.slidingupmenu.adapters.MenuModelAdapter
 import com.r4sh33d.slidingupmenu.extensions.dpToPx
-import com.r4sh33d.slidingupmenu.utils.GridSpacingItemDecoration
-import com.r4sh33d.slidingupmenu.utils.MenuModel
-import com.r4sh33d.slidingupmenu.utils.MenuType
-import com.r4sh33d.slidingupmenu.utils.ScrollDirection
+import com.r4sh33d.slidingupmenu.utils.*
+import com.r4sh33d.slidingupmenu.utils.BodyTextStyle
 
 @SuppressLint("ViewConstructor")
-class MenuRecyclerView(
+internal class MenuRecyclerView(
     context: Context,
     private val menuItems: List<MenuModel>,
     private val menuType: MenuType,
-    private val scrollDirection: ScrollDirection
+    private val scrollDirection: ScrollDirection,
+    private val bodyTextStyle: BodyTextStyle
 ) : RecyclerView(context) {
 
     init {
@@ -44,7 +43,7 @@ class MenuRecyclerView(
             )
         )
 
-        adapter = MenuModelAdapter(menuType) {
+        adapter = MenuModelAdapter(menuType, bodyTextStyle) {
             Toast.makeText(context, "Item clicked with name: ${it.title}", Toast.LENGTH_LONG).show()
         }.apply { submitList(menuItems) }
     }

@@ -5,16 +5,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
+import com.r4sh33d.slidingupmenu.utils.BodyTextStyle
 import com.r4sh33d.slidingupmenu.utils.MenuModel
 import com.r4sh33d.slidingupmenu.utils.MenuType
 import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import com.r4sh33d.slidingupmenu.views.MenuRecyclerView
 
-class ViewPagerAdapter(
+internal class ViewPagerAdapter(
     private val context: Context,
     private val groupedMenuItemsList: List<List<MenuModel>>,
     private val menuType: MenuType,
-    private val scrollDirection: ScrollDirection
+    private val scrollDirection: ScrollDirection,
+    private val bodyTextStyle: BodyTextStyle
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean = view === `object`
@@ -25,7 +27,8 @@ class ViewPagerAdapter(
         val recyclerView = MenuRecyclerView(
             context,
             groupedMenuItemsList[position],
-            menuType, scrollDirection
+            menuType, scrollDirection,
+            bodyTextStyle
         )
         container.addView(recyclerView)
         return recyclerView
