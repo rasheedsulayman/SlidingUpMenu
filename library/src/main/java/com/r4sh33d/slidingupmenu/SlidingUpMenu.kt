@@ -3,7 +3,6 @@ package com.r4sh33d.slidingupmenu
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
@@ -13,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.*
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
@@ -31,7 +29,7 @@ import kotlin.math.min
 
 
 class SlidingUpMenu(
-    private val windowContext: Context,
+    internal val windowContext: Context,
     @MenuRes menuResource: Int? = null,
     menuModelItems: MutableList<MenuModel>? = null
 ) : BottomSheetDialog(windowContext) {
@@ -44,21 +42,22 @@ class SlidingUpMenu(
     private val viewPagerContainerLinearLayout =
         dialogRootView.findViewById<LinearLayout>(R.id.viewPagerContainerLinearLayout)
     private val iconImageView = dialogRootView.findViewById<ImageView>(R.id.iconImageView)
-    private var viewPager: WrapContentViewPager
+    private lateinit var viewPager: WrapContentViewPager
+    private val menuItemsList = mutableListOf<MenuModel>()
 
     //Other fields
-    private var menuType = MenuType.GRID
-    private var scrollDirection = ScrollDirection.HORIZONTAL
-    private val menuItemsList = ArrayList<MenuModel>()
-    private var bodyColor: Int? = null
-    private val bodyTextStyle = BodyTextStyle()
+    internal var menuType = MenuType.GRID
+    internal var scrollDirection = ScrollDirection.HORIZONTAL
+    internal val bodyTextStyle = BodyTextStyle()
 
-    var dismissMenuItemSelected: Boolean = true
+    internal var menuModelSelectedListener: MenuModelSelectedListener? = null
+
+    var dismissMenuOnItemSelected: Boolean = true
         internal set
 
     init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
-            if (width == min(width, height)) 0 else ((0.8 * abs(width - height)) / 2).toInt()
+            if (width == min(width, height)) 0 else ((abs(width - height)) / 2).toInt()
         }
         val inset = InsetDrawable(
             ColorDrawable(Color.TRANSPARENT),
@@ -68,16 +67,14 @@ class SlidingUpMenu(
             0
         )
         window!!.setBackgroundDrawable(inset)
-        viewPager = WrapContentViewPager(windowContext, scrollDirection)
-        viewPagerContainerLinearLayout.addView(viewPager, 0)
-
         //Try to build the menu list
         if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
-        if (menuItemsList.size < 1) throw IllegalArgumentException(
-            "No menu item(s) to work with." + "Please specify items with a menu resource and/or supply MenuModel " +
+
+        require(menuItemsList.size > 0) {
+            "No menu item(s) to work with. Please specify items with a non-empty menu resource and/or supply MenuModel " +
                     "list to SlidingUpMenu constructor"
-        )
+        }
     }
 
     private fun configureScreen() {
@@ -92,13 +89,9 @@ class SlidingUpMenu(
     }
 
     private fun setUpViews() {
-        viewPager.adapter = ViewPagerAdapter(
-            windowContext,
-            splitMenuList(menuItemsList, scrollDirection),
-            menuType,
-            scrollDirection,
-            bodyTextStyle
-        )
+        viewPager = WrapContentViewPager(windowContext, scrollDirection)
+        viewPagerContainerLinearLayout.addView(viewPager, 0)
+        viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
         tabLayout.setupWithViewPager(viewPager, true)
     }
 
@@ -117,13 +110,24 @@ class SlidingUpMenu(
         super.show()
     }
 
-    fun dismissOnMenuItemSelected(value: Boolean): SlidingUpMenu {
-        dismissMenuItemSelected = value
+    inline fun show(block: SlidingUpMenu.() -> Unit): SlidingUpMenu {
+        block()
+        show()
         return this
     }
 
-    fun titleText(@StringRes titleRes: Int? = null, title: String? = null): SlidingUpMenu {
-        titleTextView.saveSetText(titleRes, title)
+    fun menuModelSelected(menuModelSelectedListener: MenuModelSelectedListener): SlidingUpMenu {
+        this.menuModelSelectedListener = menuModelSelectedListener
+        return this
+    }
+
+    fun dismissOnMenuItemSelected(value: Boolean): SlidingUpMenu {
+        dismissMenuOnItemSelected = value
+        return this
+    }
+
+    fun titleText(@StringRes titleRes: Int? = null, titleText: String? = null): SlidingUpMenu {
+        titleTextView.saveSetText(titleRes, titleText)
         return this
     }
 
@@ -156,3 +160,5 @@ class SlidingUpMenu(
         Log.d("SlidingUpMenu", message)
     }
 }
+
+typealias MenuModelSelectedListener = (slidingUpMenu: SlidingUpMenu, menuModel: MenuModel, position: Int) -> Unit

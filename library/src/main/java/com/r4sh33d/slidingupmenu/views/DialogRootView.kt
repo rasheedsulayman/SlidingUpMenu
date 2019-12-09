@@ -12,7 +12,6 @@ class DialogRootView(context: Context, attrs: AttributeSet?) :
     val TAG = "DialogRootView"
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-
         val screenSize =  context.getScreenSizePx()
         val newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
             min(screenSize.width, screenSize.height),

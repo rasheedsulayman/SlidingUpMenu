@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.r4sh33d.slidingupmenu.R
+import com.r4sh33d.slidingupmenu.SlidingUpMenu
 import com.r4sh33d.slidingupmenu.extensions.saveSetTextColor
 import com.r4sh33d.slidingupmenu.extensions.saveSetTypeFace
 import com.r4sh33d.slidingupmenu.extensions.show
@@ -18,16 +19,14 @@ import com.r4sh33d.slidingupmenu.utils.MenuType.GRID
 import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 
 internal class MenuModelAdapter(
-    private val menuType: MenuType,
-    private val bodyTextStyle: BodyTextStyle,
-    private val menuItemClickListener: (MenuModel) -> Unit
+    private val slidingUpMenu: SlidingUpMenu
 ) :
     ListAdapter<MenuModel, MenuModelAdapter.GridItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
         return GridItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                if (menuType == GRID) R.layout.menu_item_grid_layout else R.layout.menu_list_item_layout,
+                if (slidingUpMenu.menuType == GRID) R.layout.menu_item_grid_layout else R.layout.menu_list_item_layout,
                 parent,
                 false
             )
@@ -48,14 +47,20 @@ internal class MenuModelAdapter(
     }
 
     inner class GridItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val iconImageView = itemView.findViewById<WidthFitSquareImageView>(R.id.iconImageView)
+        private val iconImageView =
+            itemView.findViewById<WidthFitSquareImageView>(R.id.iconImageView)
         private val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
 
         init {
-            titleTextView.saveSetTypeFace(font = bodyTextStyle.font)
-            titleTextView.saveSetTextColor(color = bodyTextStyle.textColor)
+            titleTextView.saveSetTypeFace(font = slidingUpMenu.bodyTextStyle.font)
+            titleTextView.saveSetTextColor(color = slidingUpMenu.bodyTextStyle.textColor)
             itemView.setOnClickListener {
-                menuItemClickListener(getItem(adapterPosition))
+                slidingUpMenu.menuModelSelectedListener?.invoke(
+                    slidingUpMenu,
+                    getItem(adapterPosition),
+                    adapterPosition
+                )
+                if (slidingUpMenu.dismissMenuOnItemSelected) slidingUpMenu.dismiss()
             }
         }
 

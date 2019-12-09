@@ -15,6 +15,7 @@
  */
 package com.r4sh33d.slidingupmenu
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.animation.AccelerateInterpolator
 import android.widget.PopupMenu
+import android.widget.Toast
 import com.r4sh33d.R
 import com.r4sh33d.slidingupmenu.utils.MenuType
 import com.r4sh33d.slidingupmenu.utils.ScrollDirection
@@ -37,10 +39,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            SlidingUpMenu(this, "Text title", R.menu.landing_page_menu)
-                .menuType(MenuType.GRID)
-                .scrollDirection(ScrollDirection.HORIZONTAL)
-                .show()
+            SlidingUpMenu(this, R.menu.landing_page_menu).show {
+                titleText(titleText = "A gentle menu")
+                titleColor(R.color.colorAccent)
+                dismissOnMenuItemSelected(false)
+                bodyTextColor(colorInt = Color.BLUE)
+                scrollDirection(ScrollDirection.VERTICAL)
+                menuType(MenuType.LIST)
+                menuModelSelected { slidingUpMenu, menuModel, position ->
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Item selected ${menuModel.title} at position: $position",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 }
