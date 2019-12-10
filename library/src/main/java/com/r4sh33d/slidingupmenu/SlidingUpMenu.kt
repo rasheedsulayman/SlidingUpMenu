@@ -5,9 +5,11 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,13 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
 import com.r4sh33d.slidingupmenu.extensions.*
-import com.r4sh33d.slidingupmenu.extensions.getMenuList
-import com.r4sh33d.slidingupmenu.extensions.getScreenSizePx
-import com.r4sh33d.slidingupmenu.extensions.onGlobalLayout
-import com.r4sh33d.slidingupmenu.extensions.saveSetText
 import com.r4sh33d.slidingupmenu.utils.*
-import com.r4sh33d.slidingupmenu.utils.BodyTextStyle
-import com.r4sh33d.slidingupmenu.utils.splitMenuList
 import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
@@ -32,7 +28,7 @@ class SlidingUpMenu(
     internal val windowContext: Context,
     @MenuRes menuResource: Int? = null,
     menuModelItems: MutableList<MenuModel>? = null
-) : BottomSheetDialog(windowContext) {
+) : BottomSheetDialog(windowContext, R.style.Theme_Design_BottomSheetDialog) {
 
     //Views
     private val dialogRootView =
@@ -49,11 +45,12 @@ class SlidingUpMenu(
     internal var menuType = MenuType.GRID
     internal var scrollDirection = ScrollDirection.HORIZONTAL
     internal val bodyTextStyle = BodyTextStyle()
-
     internal var menuModelSelectedListener: MenuModelSelectedListener? = null
-
     var dismissMenuOnItemSelected: Boolean = true
         internal set
+
+    private var backgroundColor = windowContext.getThemeBackgroundColor()
+    private var cornerRadius: Float = 0f
 
     init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
@@ -71,6 +68,8 @@ class SlidingUpMenu(
         if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
 
+
+
         require(menuItemsList.size > 0) {
             "No menu item(s) to work with. Please specify items with a non-empty menu resource and/or supply MenuModel " +
                     "list to SlidingUpMenu constructor"
@@ -78,8 +77,8 @@ class SlidingUpMenu(
     }
 
     private fun configureScreen() {
-        setUpViews()
         setContentView(dialogRootView)
+        setUpViews()
         if (scrollDirection == ScrollDirection.HORIZONTAL) {
             dialogRootView.onGlobalLayout {
                 behavior.peekHeight = dialogRootView.height
@@ -89,6 +88,13 @@ class SlidingUpMenu(
     }
 
     private fun setUpViews() {
+        val v =
+            window!!.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+        v.background = GradientDrawable().apply {
+            cornerRadius = this@SlidingUpMenu.cornerRadius
+            setColor(backgroundColor)
+        }
+
         viewPager = WrapContentViewPager(windowContext, scrollDirection)
         viewPagerContainerLinearLayout.addView(viewPager, 0)
         viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
@@ -156,9 +162,18 @@ class SlidingUpMenu(
         return this
     }
 
+    fun cornerRadius(@DimenRes dimenRes: Int? = null, dimensionInPx: Int? = null): SlidingUpMenu {
+        cornerRadius = getDimension(windowContext, dimenRes, dimensionInPx) ?: cornerRadius
+        return this
+    }
+
+    fun backgroundColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
+        backgroundColor = getColor(windowContext, colorRes, colorInt) ?: backgroundColor
+        return this
+    }
+
+
     fun logMessage(message: String) {
         Log.d("SlidingUpMenu", message)
     }
 }
-
-typealias MenuModelSelectedListener = (slidingUpMenu: SlidingUpMenu, menuModel: MenuModel, position: Int) -> Unit

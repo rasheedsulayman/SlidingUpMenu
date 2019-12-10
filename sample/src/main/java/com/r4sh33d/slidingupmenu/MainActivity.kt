@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
             SlidingUpMenu(this, R.menu.landing_page_menu).show {
+                cornerRadius(dimensionInPx = 64)
+               // backgroundColor(colorInt = Color.CYAN)
                 titleText(titleText = "A gentle menu")
                 titleColor(R.color.colorAccent)
                 dismissOnMenuItemSelected(false)

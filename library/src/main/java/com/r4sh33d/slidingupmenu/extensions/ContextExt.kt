@@ -1,6 +1,8 @@
 package com.r4sh33d.slidingupmenu.extensions
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.MenuInflater
@@ -10,6 +12,7 @@ import com.r4sh33d.slidingupmenu.utils.MenuModel
 import com.r4sh33d.slidingupmenu.utils.SizeFloat
 import com.r4sh33d.slidingupmenu.utils.SizeInt
 import kotlin.math.roundToInt
+
 
 internal fun Context.getScreenSizeDp(): SizeFloat {
     val displayMetrics: DisplayMetrics = resources.displayMetrics
@@ -41,4 +44,14 @@ internal fun Context.getScreenSizePx(): SizeInt {
         displayMetrics.heightPixels,
         displayMetrics.widthPixels
     )
+}
+
+@SuppressLint("InlinedApi")
+internal fun Context.getThemeBackgroundColor(): Int {
+    val attributes = theme.obtainStyledAttributes(intArrayOf(android.R.attr.colorBackgroundFloating))
+    try {
+        return attributes.getColor(0, Color.WHITE)
+    } finally {
+        attributes.recycle()
+    }
 }

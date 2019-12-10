@@ -84,6 +84,11 @@ internal fun getDrawableAsset(
     ) else null
 }
 
+internal fun getDimension(
+    context: Context, @DimenRes dimenRes: Int? = null,
+    @Px dimensionInPx: Int? = null
+): Float? = dimensionInPx?.toFloat() ?: if (dimenRes != null) context.resources.getDimension(dimenRes) else null
+
 internal fun getTextString(
     context: Context,
     @StringRes titleRes: Int? = null,
