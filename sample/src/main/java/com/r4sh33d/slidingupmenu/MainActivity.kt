@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             SlidingUpMenu(this, R.menu.landing_page_menu).show {
                 cornerRadius(dimensionInPx = 64)
-               // backgroundColor(colorInt = Color.CYAN)
+                backgroundColor(colorInt = Color.WHITE)
                 titleText(titleText = "A gentle menu")
                 titleColor(R.color.colorAccent)
                 dismissOnMenuItemSelected(false)
                 bodyTextColor(colorInt = Color.BLUE)
-                scrollDirection(ScrollDirection.VERTICAL)
-                menuType(MenuType.LIST)
+                scrollDirection(ScrollDirection.HORIZONTAL)
+                menuType(MenuType.GRID)
                 menuModelSelected { slidingUpMenu, menuModel, position ->
                     Toast.makeText(
                         this@MainActivity,

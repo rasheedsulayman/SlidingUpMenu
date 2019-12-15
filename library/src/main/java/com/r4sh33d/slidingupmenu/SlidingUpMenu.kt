@@ -50,7 +50,7 @@ class SlidingUpMenu(
         internal set
 
     private var backgroundColor = windowContext.getThemeBackgroundColor()
-    private var cornerRadius: Float = 0f
+    private var dialogCornerRadius: Float = 0f
 
     init {
         val marginLeftRight = windowContext.getScreenSizePx().run {
@@ -67,8 +67,6 @@ class SlidingUpMenu(
         //Try to build the menu list
         if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
-
-
 
         require(menuItemsList.size > 0) {
             "No menu item(s) to work with. Please specify items with a non-empty menu resource and/or supply MenuModel " +
@@ -88,13 +86,14 @@ class SlidingUpMenu(
     }
 
     private fun setUpViews() {
-        val v =
-            window!!.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-        v.background = GradientDrawable().apply {
-            cornerRadius = this@SlidingUpMenu.cornerRadius
+        window!!.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+            .background = GradientDrawable().apply {
+            cornerRadii = floatArrayOf(
+                dialogCornerRadius, dialogCornerRadius, dialogCornerRadius, dialogCornerRadius,
+                0f, 0f, 0f, 0f
+            )
             setColor(backgroundColor)
         }
-
         viewPager = WrapContentViewPager(windowContext, scrollDirection)
         viewPagerContainerLinearLayout.addView(viewPager, 0)
         viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
@@ -153,25 +152,24 @@ class SlidingUpMenu(
     }
 
     fun bodyTextColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        bodyTextStyle.textColor = getColor(windowContext, colorRes, colorInt)
+        bodyTextStyle.textColor = windowContext.getColor(colorRes, colorInt)
         return this
     }
 
     fun bodyTextFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
-        bodyTextStyle.font = getFont(windowContext, fontRes, font)
+        bodyTextStyle.font = windowContext.getFont(fontRes, font)
         return this
     }
 
     fun cornerRadius(@DimenRes dimenRes: Int? = null, dimensionInPx: Int? = null): SlidingUpMenu {
-        cornerRadius = getDimension(windowContext, dimenRes, dimensionInPx) ?: cornerRadius
+        dialogCornerRadius = windowContext.getDimension(dimenRes, dimensionInPx) ?: dialogCornerRadius
         return this
     }
 
     fun backgroundColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        backgroundColor = getColor(windowContext, colorRes, colorInt) ?: backgroundColor
+        backgroundColor = windowContext.getColor(colorRes, colorInt) ?: backgroundColor
         return this
     }
-
 
     fun logMessage(message: String) {
         Log.d("SlidingUpMenu", message)
