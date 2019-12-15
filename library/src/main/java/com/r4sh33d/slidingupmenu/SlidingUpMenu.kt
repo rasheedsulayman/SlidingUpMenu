@@ -25,14 +25,14 @@ import kotlin.math.min
 
 
 class SlidingUpMenu(
-    internal val windowContext: Context,
+    context: Context,
     @MenuRes menuResource: Int? = null,
     menuModelItems: MutableList<MenuModel>? = null
-) : BottomSheetDialog(windowContext, R.style.Theme_Design_BottomSheetDialog) {
+) : BottomSheetDialog(context, R.style.Theme_Design_BottomSheetDialog) {
 
     //Views
     private val dialogRootView =
-        LayoutInflater.from(windowContext).inflate(R.layout.dialog_root_view, null)
+        LayoutInflater.from(context).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
     private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
     private val viewPagerContainerLinearLayout =
@@ -49,11 +49,11 @@ class SlidingUpMenu(
     var dismissMenuOnItemSelected: Boolean = true
         internal set
 
-    private var backgroundColor = windowContext.getThemeBackgroundColor()
+    private var backgroundColor = context.getThemeBackgroundColor()
     private var dialogCornerRadius: Float = 0f
 
     init {
-        val marginLeftRight = windowContext.getScreenSizePx().run {
+        val marginLeftRight = context.getScreenSizePx().run {
             if (width == min(width, height)) 0 else ((abs(width - height)) / 2).toInt()
         }
         val inset = InsetDrawable(
@@ -65,12 +65,12 @@ class SlidingUpMenu(
         )
         window!!.setBackgroundDrawable(inset)
         //Try to build the menu list
-        if (menuResource != null) menuItemsList.addAll(windowContext.getMenuList(menuResource))
+        if (menuResource != null) menuItemsList.addAll(context.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
 
         require(menuItemsList.size > 0) {
-            "No menu item(s) to work with. Please specify items with a non-empty menu resource and/or supply MenuModel " +
-                    "list to SlidingUpMenu constructor"
+            "No menu item(s) to work with. Please specify items with a non-empty menu resource " +
+                    "and/or supply MenuModel list to SlidingUpMenu constructor"
         }
     }
 
@@ -94,7 +94,7 @@ class SlidingUpMenu(
             )
             setColor(backgroundColor)
         }
-        viewPager = WrapContentViewPager(windowContext, scrollDirection)
+        viewPager = WrapContentViewPager(context, scrollDirection)
         viewPagerContainerLinearLayout.addView(viewPager, 0)
         viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
         tabLayout.setupWithViewPager(viewPager, true)
@@ -152,22 +152,22 @@ class SlidingUpMenu(
     }
 
     fun bodyTextColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        bodyTextStyle.textColor = windowContext.getColor(colorRes, colorInt)
+        bodyTextStyle.textColor = context.getColor(colorRes, colorInt)
         return this
     }
 
     fun bodyTextFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
-        bodyTextStyle.font = windowContext.getFont(fontRes, font)
+        bodyTextStyle.font = context.getFont(fontRes, font)
         return this
     }
 
     fun cornerRadius(@DimenRes dimenRes: Int? = null, dimensionInPx: Int? = null): SlidingUpMenu {
-        dialogCornerRadius = windowContext.getDimension(dimenRes, dimensionInPx) ?: dialogCornerRadius
+        dialogCornerRadius = context.getDimension(dimenRes, dimensionInPx) ?: dialogCornerRadius
         return this
     }
 
     fun backgroundColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        backgroundColor = windowContext.getColor(colorRes, colorInt) ?: backgroundColor
+        backgroundColor = context.getColor(colorRes, colorInt) ?: backgroundColor
         return this
     }
 

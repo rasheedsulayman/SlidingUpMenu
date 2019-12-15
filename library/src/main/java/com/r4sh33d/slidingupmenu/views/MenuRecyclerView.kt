@@ -15,8 +15,9 @@ import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 @SuppressLint("ViewConstructor")
 internal class MenuRecyclerView(
     private val menuItems: List<MenuModel>,
-    private val slidingUpMenu: SlidingUpMenu
-) : RecyclerView(slidingUpMenu.windowContext) {
+    private val slidingUpMenu: SlidingUpMenu,
+    private val itemPositionOffset: Int
+) : RecyclerView(slidingUpMenu.context) {
 
     init {
         setUpViews()
@@ -35,6 +36,6 @@ internal class MenuRecyclerView(
         }
 
         addItemDecoration(GridSpacingItemDecoration(4, context.dpToPx(4)))
-        adapter = MenuModelAdapter(slidingUpMenu).apply { submitList(menuItems) }
+        adapter = MenuModelAdapter(slidingUpMenu, itemPositionOffset).apply { submitList(menuItems) }
     }
 }

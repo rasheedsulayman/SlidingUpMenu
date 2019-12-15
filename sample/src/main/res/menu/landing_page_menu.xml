@@ -3,109 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_abouttt"
-        android:title="About"
+        android:id="@+id/menu_one"
+        android:title="Menu 1"
+        android:icon="@drawable/flight_track"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_feedbackkk"
-        android:title="Send Feedback Fedbacck"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_rateee"
-        android:title="Rate Us"
+        android:icon="@drawable/avast"
+        android:id="@+id/menu_two"
+        android:title="Menu 2"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_licencessss"
-        android:title="Licences"
+        android:icon="@drawable/gmail"
+        android:id="@+id/menu_three"
+        android:title="Menu 3"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_aboutttt"
-        android:title="About"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_feedbackkkk"
-        android:title="Send Feedback"
+        android:icon="@drawable/hotspot"
+        android:id="@+id/menu_four"
+        android:title="Menu 5"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_rateeee"
-        android:title="Rate Us"
+        android:icon="@drawable/google_earth"
+        android:title="Menu 6"
+        android:id="@+id/menu_five"
+        app:showAsAction="never" />
+    <item
+        android:icon="@drawable/google_play"
+        android:title="Menu 7"
+        android:id="@+id/menu_six"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_licencesss"
-        android:title="Licences"
-        app:showAsAction="never" />
-
-
-    <item
-        android:id="@+id/menu_aboutt"
-        android:title="About"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_feedbackk"
-        android:title="Send Feedback"
+        android:icon="@drawable/google_docs"
+        android:title="Menu 8"
+        android:id="@+id/menu_eight"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_ratee"
-        android:title="Rate Us"
+        android:icon="@drawable/linux"
+        android:title="Menu 9"
+        android:id="@+id/menu_nine"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_licencess"
-        android:title="Licences"
+        android:icon="@drawable/origin"
+        android:title="Menu 10"
+        android:id="@+id/menu_ten"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_about"
-        android:title="About"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_feedback"
-        android:title="Send Feedback"
+        android:icon="@drawable/radar"
+        android:title="Menu 11"
+        android:id="@+id/menu_eleven"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_rate"
-        android:title="Rate Us"
+        android:icon="@drawable/shazam"
+        android:title="Menu 12"
+        android:id="@+id/menu_twelve"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_licences"
-        android:title="Licences"
+        android:icon="@drawable/starbucks"
+        android:title="Menu 13"
+        android:id="@+id/menu_thirteen"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_rateeeee"
-        android:title="Rate Us"
+        android:icon="@drawable/radar"
+        android:title="Menu 14"
+        android:id="@+id/menu_fourteen"
+        app:showAsAction="never" />
+    <item
+        android:icon="@drawable/vlc"
+        android:title="Menu 15"
+        android:id="@+id/menu_fifteen"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_licenecessss"
-        android:title="Licences"
+        android:icon="@drawable/radar"
+        android:title="Menu 16"
+        android:id="@+id/menu_sixteen"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_aboutttwt"
-        android:title="About"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_feedbacck"
-        android:title="Send Feedback"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_rateeeeee"
-        android:title="Rate Us"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_licencesssee"
-        android:title="Licences"
+        android:icon="@drawable/zune"
+        android:title="Menu 17"
+        android:id="@+id/menu_seventeen"
         app:showAsAction="never" />
 
 </menu>

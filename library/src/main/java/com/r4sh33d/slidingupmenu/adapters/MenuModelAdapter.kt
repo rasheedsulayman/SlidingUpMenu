@@ -12,14 +12,13 @@ import com.r4sh33d.slidingupmenu.SlidingUpMenu
 import com.r4sh33d.slidingupmenu.extensions.saveSetTextColor
 import com.r4sh33d.slidingupmenu.extensions.saveSetTypeFace
 import com.r4sh33d.slidingupmenu.extensions.show
-import com.r4sh33d.slidingupmenu.utils.BodyTextStyle
 import com.r4sh33d.slidingupmenu.utils.MenuModel
-import com.r4sh33d.slidingupmenu.utils.MenuType
 import com.r4sh33d.slidingupmenu.utils.MenuType.GRID
 import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 
 internal class MenuModelAdapter(
-    private val slidingUpMenu: SlidingUpMenu
+    private val slidingUpMenu: SlidingUpMenu,
+    private val itemPositionOffset: Int
 ) :
     ListAdapter<MenuModel, MenuModelAdapter.GridItemViewHolder>(DiffCallback) {
 
@@ -58,7 +57,7 @@ internal class MenuModelAdapter(
                 slidingUpMenu.menuModelSelectedListener?.invoke(
                     slidingUpMenu,
                     getItem(adapterPosition),
-                    adapterPosition
+                    adapterPosition + itemPositionOffset
                 )
                 if (slidingUpMenu.dismissMenuOnItemSelected) slidingUpMenu.dismiss()
             }
