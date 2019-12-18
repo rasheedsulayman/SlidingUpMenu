@@ -25,7 +25,6 @@ internal class MenuRecyclerView(
 
     private fun setUpViews() {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-
         layoutManager = when (slidingUpMenu.menuType) {
             MenuType.LIST -> LinearLayoutManager(context)
             MenuType.GRID -> object : GridLayoutManager(context, 4) {
@@ -34,7 +33,6 @@ internal class MenuRecyclerView(
                     slidingUpMenu.scrollDirection == ScrollDirection.VERTICAL
             }
         }
-
         addItemDecoration(GridSpacingItemDecoration(4, context.dpToPx(4)))
         adapter = MenuModelAdapter(slidingUpMenu, itemPositionOffset).apply { submitList(menuItems) }
     }

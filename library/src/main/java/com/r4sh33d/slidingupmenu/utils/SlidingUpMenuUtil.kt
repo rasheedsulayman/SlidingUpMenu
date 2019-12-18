@@ -180,36 +180,6 @@ object SlidingUpMenuUtil {
     }
 
     @RestrictTo(LIBRARY_GROUP)
-    fun <T : View> T.dimenPx(@DimenRes res: Int): Int {
-        return context.resources.getDimensionPixelSize(res)
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun Context.isLandscape() =
-        resources.configuration.orientation == ORIENTATION_LANDSCAPE
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun EditText.textChanged(callback: (CharSequence) -> Unit) {
-        this.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) = Unit
-
-            override fun beforeTextChanged(
-                s: CharSequence,
-                start: Int,
-                count: Int,
-                after: Int
-            ) = Unit
-
-            override fun onTextChanged(
-                s: CharSequence,
-                start: Int,
-                before: Int,
-                count: Int
-            ) = callback.invoke(s)
-        })
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
     fun TextView?.maybeSetTextColor(
         context: Context,
         @AttrRes attrRes: Int?,
@@ -232,105 +202,6 @@ object SlidingUpMenuUtil {
     }
 
     @RestrictTo(LIBRARY_GROUP)
-    fun createColorSelector(
-        context: Context,
-        @ColorInt unchecked: Int = 0,
-        @ColorInt checked: Int = 0
-    ): ColorStateList {
-        val checkedColor = if (checked == 0) resolveColor(
-            context, attr = R.attr.colorControlActivated
-        ) else checked
-        return ColorStateList(
-            arrayOf(
-                intArrayOf(-attr.state_checked, -attr.state_focused),
-                intArrayOf(attr.state_checked),
-                intArrayOf(attr.state_focused)
-            ),
-            intArrayOf(
-                if (unchecked == 0) resolveColor(
-                    context, attr = R.attr.colorControlNormal
-                ) else unchecked,
-                checkedColor,
-                checkedColor
-            )
-        )
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun <T : View> T.waitForWidth(block: T.() -> Unit) {
-        if (measuredWidth > 0 && measuredHeight > 0) {
-            this.block()
-            return
-        }
-
-        viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            var lastWidth: Int? = null
-
-            override fun onGlobalLayout() {
-                if (lastWidth != null && lastWidth == measuredWidth) {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    return
-                }
-                if (measuredWidth > 0 && measuredHeight > 0 && lastWidth != measuredWidth) {
-                    lastWidth = measuredWidth
-                    this@waitForWidth.block()
-                }
-            }
-        })
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun <T : View> T.waitForHeight(block: T.() -> Unit) {
-        if (measuredWidth > 0 && measuredHeight > 0) {
-            this.block()
-            return
-        }
-
-        viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            var lastHeight: Int? = null
-
-            override fun onGlobalLayout() {
-                if (lastHeight != null && lastHeight == measuredHeight) {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    return
-                }
-                if (measuredWidth > 0 && measuredHeight > 0 && lastHeight != measuredHeight) {
-                    lastHeight = measuredHeight
-                    this@waitForHeight.block()
-                }
-            }
-        })
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun WindowManager.getWidthAndHeight(): Pair<Int, Int> {
-        val size = Point()
-        defaultDisplay.getSize(size)
-        return Pair(size.x, size.y)
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
-    fun <T : View> T?.updatePadding(
-        left: Int = this?.paddingLeft ?: 0,
-        top: Int = this?.paddingTop ?: 0,
-        right: Int = this?.paddingRight ?: 0,
-        bottom: Int = this?.paddingBottom ?: 0
-    ) {
-        if (this != null &&
-            left == this.paddingLeft &&
-            top == this.paddingTop &&
-            right == this.paddingRight &&
-            bottom == this.paddingBottom
-        ) {
-            // no change needed, don't want to invalidate layout
-            return
-        }
-        this?.setPadding(left, top, right, bottom)
-    }
-
-    @RestrictTo(LIBRARY_GROUP)
     fun assertOneSet(
         method: String,
         b: Any?,
@@ -341,21 +212,8 @@ object SlidingUpMenuUtil {
         }
     }
 
-    @RestrictTo(LIBRARY_GROUP)
-    fun Context.getStringArray(@ArrayRes res: Int?): Array<String> {
-        return if (res != null) return resources.getStringArray(res) else emptyArray()
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    @RestrictTo(LIBRARY_GROUP)
-    fun <R : View> ViewGroup.inflate(
-        ctxt: Context = context,
-        @LayoutRes res: Int
-    ) = LayoutInflater.from(ctxt).inflate(res, this, false) as R
-
-
     @StyleRes
-    internal fun getDialogTheme(context: Context) : Int =
+    internal fun getDialogTheme(context: Context): Int =
         if (inferThemeIsLight(context)) R.style.SM_Light_BottomSheet else R.style.SM_Dark_BottomSheet
 
     @CheckResult

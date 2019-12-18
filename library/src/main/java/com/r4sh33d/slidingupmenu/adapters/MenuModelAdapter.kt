@@ -26,8 +26,7 @@ internal class MenuModelAdapter(
         return GridItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 if (slidingUpMenu.menuType == GRID) R.layout.menu_item_grid_layout else R.layout.menu_list_item_layout,
-                parent,
-                false
+                parent, false
             )
         )
     }

@@ -5,6 +5,7 @@ import androidx.annotation.ColorInt
 import com.r4sh33d.slidingupmenu.SlidingUpMenu
 
 internal class SizeFloat(val height: Float, val width: Float)
+
 internal class SizeInt(val height: Int, val width: Int)
 
 enum class MenuType {

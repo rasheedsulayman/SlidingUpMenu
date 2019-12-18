@@ -32,19 +32,16 @@ class SlidingUpMenu(
     context: Context,
     @MenuRes val menuResource: Int? = null,
     private val menuModelItems: List<MenuModel>? = null
-) : BottomSheetDialog(context, R.style.Theme_Design_BottomSheetDialog) {
+) : BottomSheetDialog(context, getDialogTheme(context)) {
 
     //Views
-    internal val dialogRootView =
-        LayoutInflater.from(context).inflate(R.layout.dialog_root_view, null)
+    internal val dialogRootView = context.inflate<LinearLayout>(R.layout.dialog_root_view)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
-    private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
     private val viewPagerContainerLinearLayout =
         dialogRootView.findViewById<LinearLayout>(R.id.viewPagerContainerLinearLayout)
     private val iconImageView = dialogRootView.findViewById<ImageView>(R.id.iconImageView)
     private var rootViewFrameLayoutWrapper: FrameLayout
 
-    private lateinit var viewPager: WrapContentViewPager
     private val menuItemsList = mutableListOf<MenuModel>()
 
     //Other fields
@@ -94,21 +91,19 @@ class SlidingUpMenu(
         }
     }
 
-    private fun configureScreen() {
-        setUpViews()
+    private fun setUpViews() {
+        val viewPager = WrapContentViewPager(context, scrollDirection)
+        val tabLayout = context.inflate<TabLayout>(R.layout.tab_layout)
+        viewPagerContainerLinearLayout.addView(viewPager)
+        viewPagerContainerLinearLayout.addView(tabLayout)
+        viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
+        tabLayout.setupWithViewPager(viewPager, true)
         if (scrollDirection == ScrollDirection.HORIZONTAL) {
             dialogRootView.onGlobalLayout {
                 behavior.peekHeight = dialogRootView.height
                 logMessage("dialog height: ${dialogRootView.height}")
             }
         }
-    }
-
-    private fun setUpViews() {
-        viewPager = WrapContentViewPager(context, scrollDirection)
-        viewPagerContainerLinearLayout.addView(viewPager, 0)
-        viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
-        tabLayout.setupWithViewPager(viewPager, true)
     }
 
     fun titleText(
@@ -136,7 +131,7 @@ class SlidingUpMenu(
     }
 
     override fun show() {
-        configureScreen()
+        setUpViews()
         super.show()
     }
 
@@ -186,11 +181,8 @@ class SlidingUpMenu(
 
     private fun invalidateBackgroundColorAndRadius() {
         val backgroundColor = resolveColor(attr = R.attr.sm_background_color) {
-            logMessage("About to get color floating")
             resolveColor(attr = R.attr.colorBackgroundFloating)
         }
-        val hexColor = String.format("#%06X", (0xFFFFFF and backgroundColor))
-        logMessage("Color string is: $hexColor")
         val cornerRadius = cornerRadius ?: resolveDimen(context, attr = R.attr.sm_corner_radius)
         rootViewFrameLayoutWrapper.background = GradientDrawable().apply {
             cornerRadii = getTopLeftCornerRadius(cornerRadius)
