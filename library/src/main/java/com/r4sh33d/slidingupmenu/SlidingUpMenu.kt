@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -19,6 +20,9 @@ import com.google.android.material.tabs.TabLayout
 import com.r4sh33d.slidingupmenu.adapters.ViewPagerAdapter
 import com.r4sh33d.slidingupmenu.extensions.*
 import com.r4sh33d.slidingupmenu.utils.*
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.assertOneSet
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.getDialogTheme
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveDimen
 import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
@@ -26,35 +30,49 @@ import kotlin.math.min
 
 class SlidingUpMenu(
     context: Context,
-    @MenuRes menuResource: Int? = null,
-    menuModelItems: MutableList<MenuModel>? = null
+    @MenuRes val menuResource: Int? = null,
+    private val menuModelItems: List<MenuModel>? = null
 ) : BottomSheetDialog(context, R.style.Theme_Design_BottomSheetDialog) {
 
     //Views
-    private val dialogRootView =
+    internal val dialogRootView =
         LayoutInflater.from(context).inflate(R.layout.dialog_root_view, null)
     private val titleTextView = dialogRootView.findViewById<TextView>(R.id.dialogTitleTextView)
     private val tabLayout = dialogRootView.findViewById<TabLayout>(R.id.tabLayout)
     private val viewPagerContainerLinearLayout =
         dialogRootView.findViewById<LinearLayout>(R.id.viewPagerContainerLinearLayout)
     private val iconImageView = dialogRootView.findViewById<ImageView>(R.id.iconImageView)
+    private var rootViewFrameLayoutWrapper: FrameLayout
+
     private lateinit var viewPager: WrapContentViewPager
     private val menuItemsList = mutableListOf<MenuModel>()
 
     //Other fields
     internal var menuType = MenuType.GRID
     internal var scrollDirection = ScrollDirection.HORIZONTAL
-    internal val bodyTextStyle = BodyTextStyle()
     internal var menuModelSelectedListener: MenuModelSelectedListener? = null
-    var dismissMenuOnItemSelected: Boolean = true
-        internal set
+    internal var dismissMenuOnItemSelected: Boolean = true
 
-    private var backgroundColor = context.getThemeBackgroundColor()
-    private var dialogCornerRadius: Float = 0f
+    var titleTextFont: Typeface? = null
+        internal set
+    var bodyTextFont: Typeface? = null
+        internal set
+    private var cornerRadius: Float? = null
 
     init {
+        setContentView(dialogRootView)
+        rootViewFrameLayoutWrapper =
+            window!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+        setUpWindowContent()
+        populateMenuModelItems()
+        invalidateBackgroundColorAndRadius()
+        titleTextFont = font(attr = R.attr.sm_title_text_font)
+        bodyTextFont = font(attr = R.attr.sm_body_text_font)
+    }
+
+    private fun setUpWindowContent() {
         val marginLeftRight = context.getScreenSizePx().run {
-            if (width == min(width, height)) 0 else ((abs(width - height)) / 2).toInt()
+            if (width == min(width, height)) 0 else ((abs(width - height)) / 2)
         }
         val inset = InsetDrawable(
             ColorDrawable(Color.TRANSPARENT),
@@ -64,10 +82,12 @@ class SlidingUpMenu(
             0
         )
         window!!.setBackgroundDrawable(inset)
+    }
+
+    private fun populateMenuModelItems() {
         //Try to build the menu list
         if (menuResource != null) menuItemsList.addAll(context.getMenuList(menuResource))
         if (menuModelItems != null) menuItemsList.addAll(menuModelItems)
-
         require(menuItemsList.size > 0) {
             "No menu item(s) to work with. Please specify items with a non-empty menu resource " +
                     "and/or supply MenuModel list to SlidingUpMenu constructor"
@@ -75,7 +95,6 @@ class SlidingUpMenu(
     }
 
     private fun configureScreen() {
-        setContentView(dialogRootView)
         setUpViews()
         if (scrollDirection == ScrollDirection.HORIZONTAL) {
             dialogRootView.onGlobalLayout {
@@ -86,18 +105,24 @@ class SlidingUpMenu(
     }
 
     private fun setUpViews() {
-        window!!.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-            .background = GradientDrawable().apply {
-            cornerRadii = floatArrayOf(
-                dialogCornerRadius, dialogCornerRadius, dialogCornerRadius, dialogCornerRadius,
-                0f, 0f, 0f, 0f
-            )
-            setColor(backgroundColor)
-        }
         viewPager = WrapContentViewPager(context, scrollDirection)
         viewPagerContainerLinearLayout.addView(viewPager, 0)
         viewPager.adapter = ViewPagerAdapter(this, splitMenuList(menuItemsList, scrollDirection))
         tabLayout.setupWithViewPager(viewPager, true)
+    }
+
+    fun titleText(
+        @StringRes titleRes: Int? = null, titleText: String? = null
+    ): SlidingUpMenu {
+        assertOneSet("title", titleText, titleRes)
+        populateText(
+            titleTextView,
+            textRes = titleRes,
+            text = titleText,
+            typeface = titleTextFont,
+            textColor = R.attr.sm_title_text_color
+        )
+        return this
     }
 
     fun menuType(menuType: MenuType): SlidingUpMenu {
@@ -131,44 +156,46 @@ class SlidingUpMenu(
         return this
     }
 
-    fun titleText(@StringRes titleRes: Int? = null, titleText: String? = null): SlidingUpMenu {
-        titleTextView.saveSetText(titleRes, titleText)
+    fun icon(
+        @DrawableRes res: Int? = null,
+        drawable: Drawable? = null
+    ): SlidingUpMenu {
+        assertOneSet("icon", drawable, res)
+        populateIcon(
+            iconImageView,
+            iconRes = res,
+            icon = drawable
+        )
         return this
     }
 
-    fun titleColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        titleTextView.saveSetTextColor(colorRes, colorInt)
+    fun cornerRadius(
+        dpLiteral: Float? = null,
+        @DimenRes dpRes: Int? = null
+    ): SlidingUpMenu {
+        assertOneSet("cornerRadius", dpLiteral, dpRes)
+        cornerRadius = if (dpRes != null) {
+            context.resources.getDimension(dpRes)
+        } else {
+            val displayMetrics = context.resources.displayMetrics
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpLiteral!!, displayMetrics)
+        }
+        invalidateBackgroundColorAndRadius()
         return this
     }
 
-    fun icon(@DrawableRes iconDrawableRes: Int? = null, iconDrawable: Drawable? = null): SlidingUpMenu {
-        iconImageView.saveSetIconDrawable(iconDrawableRes, iconDrawable)
-        return this
-    }
-
-    fun titleFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
-        titleTextView.saveSetTypeFace(fontRes, font)
-        return this
-    }
-
-    fun bodyTextColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        bodyTextStyle.textColor = context.getColor(colorRes, colorInt)
-        return this
-    }
-
-    fun bodyTextFont(@FontRes fontRes: Int? = null, font: Typeface): SlidingUpMenu {
-        bodyTextStyle.font = context.getFont(fontRes, font)
-        return this
-    }
-
-    fun cornerRadius(@DimenRes dimenRes: Int? = null, dimensionInPx: Int? = null): SlidingUpMenu {
-        dialogCornerRadius = context.getDimension(dimenRes, dimensionInPx) ?: dialogCornerRadius
-        return this
-    }
-
-    fun backgroundColor(@ColorRes colorRes: Int? = null, @ColorInt colorInt: Int? = null): SlidingUpMenu {
-        backgroundColor = context.getColor(colorRes, colorInt) ?: backgroundColor
-        return this
+    private fun invalidateBackgroundColorAndRadius() {
+        val backgroundColor = resolveColor(attr = R.attr.sm_background_color) {
+            logMessage("About to get color floating")
+            resolveColor(attr = R.attr.colorBackgroundFloating)
+        }
+        val hexColor = String.format("#%06X", (0xFFFFFF and backgroundColor))
+        logMessage("Color string is: $hexColor")
+        val cornerRadius = cornerRadius ?: resolveDimen(context, attr = R.attr.sm_corner_radius)
+        rootViewFrameLayoutWrapper.background = GradientDrawable().apply {
+            cornerRadii = getTopLeftCornerRadius(cornerRadius)
+            setColor(backgroundColor)
+        }
     }
 
     fun logMessage(message: String) {

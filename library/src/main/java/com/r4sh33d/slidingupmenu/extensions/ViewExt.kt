@@ -1,6 +1,5 @@
 package com.r4sh33d.slidingupmenu.extensions
 
-import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -8,8 +7,6 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.*
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -17,6 +14,10 @@ fun View.show() {
 
 fun View.hide() {
     visibility = View.GONE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
 }
 
 internal inline fun View.onGlobalLayout(crossinline block: () -> Unit) {

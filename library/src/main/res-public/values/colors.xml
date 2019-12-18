@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="selected_color">#E13A3634</color>
+
+    <color name="sm_item_selected">#33969696</color>
+    <color name="sm_item_selected_dark">#40CBCBCB</color>
 </resources>

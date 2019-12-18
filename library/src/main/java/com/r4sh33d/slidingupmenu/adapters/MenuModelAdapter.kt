@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.r4sh33d.slidingupmenu.R
 import com.r4sh33d.slidingupmenu.SlidingUpMenu
-import com.r4sh33d.slidingupmenu.extensions.saveSetTextColor
-import com.r4sh33d.slidingupmenu.extensions.saveSetTypeFace
 import com.r4sh33d.slidingupmenu.extensions.show
 import com.r4sh33d.slidingupmenu.utils.MenuModel
 import com.r4sh33d.slidingupmenu.utils.MenuType.GRID
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.maybeSetTextColor
+import com.r4sh33d.slidingupmenu.utils.getItemSelector
 import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 
 internal class MenuModelAdapter(
@@ -51,8 +51,9 @@ internal class MenuModelAdapter(
         private val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
 
         init {
-            titleTextView.saveSetTypeFace(font = slidingUpMenu.bodyTextStyle.font)
-            titleTextView.saveSetTextColor(color = slidingUpMenu.bodyTextStyle.textColor)
+            itemView.background = slidingUpMenu.getItemSelector()
+            titleTextView.maybeSetTextColor(slidingUpMenu.context, R.attr.sm_body_text_color)
+            slidingUpMenu.bodyTextFont?.let { titleTextView.typeface = it }
             itemView.setOnClickListener {
                 slidingUpMenu.menuModelSelectedListener?.invoke(
                     slidingUpMenu,

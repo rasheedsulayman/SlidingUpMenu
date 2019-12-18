@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SM_Light_BottomSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="sm_item_selector">@drawable/sm_item_selector</item>
+        <item name="sm_tab_selector_background">@drawable/sm_tab_selector</item>
+
+    </style>
+
+    <style name="SM_Dark_BottomSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="sm_item_selector">@drawable/sm_item_selector_dark</item>
+        <item name="sm_tab_selector_background">@drawable/sm_tab_selector_dark</item>
+    </style>
+
+</resources>

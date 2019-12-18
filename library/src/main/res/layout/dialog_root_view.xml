@@ -21,7 +21,6 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginEnd="16dp"
-            android:background="@android:color/holo_green_light"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -49,7 +48,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp"
-            app:tabBackground="@drawable/tab_selector"
+            app:tabBackground="?attr/sm_tab_selector_background"
             app:tabGravity="center"
             app:tabIndicatorGravity="bottom"
             app:tabIndicatorHeight="0dp"

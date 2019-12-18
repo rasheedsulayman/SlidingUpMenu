@@ -1,2 +1,9 @@
 <resources>
+    <attr format="color" name="sm_background_color"/>
+    <attr format="color" name="sm_title_text_color"/>
+    <attr format="color" name="sm_body_text_color"/>
+    <attr format="color" name="sm_ripple_color"/>
+    <attr format="dimension" name="sm_corner_radius"/>
+    <attr format="reference" name="sm_title_text_font"/>
+    <attr format="reference" name="sm_body_text_font"/>
 </resources>

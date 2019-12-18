@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="sm_corner_radius">16dp</item>
+
+      <!-- <item name="sm_title_text_font">@font/fugaz_one</item>
+        <item name="sm_body_text_font">@font/maven_pro</item>
+        <item name="sm_background_color">@android:color/holo_blue_bright</item>
+        <item name="sm_body_text_color">@android:color/holo_orange_light</item>
+        <item name="sm_title_text_color">@color/colorAccent</item>
+        <item name="sm_ripple_color">@android:color/black</item> -->
+
     </style>
 
 </resources>

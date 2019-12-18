@@ -15,37 +15,39 @@
  */
 package com.r4sh33d.slidingupmenu
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.animation.AccelerateInterpolator
-import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.r4sh33d.R
+import com.r4sh33d.slidingupmenu.utils.MenuModel
 import com.r4sh33d.slidingupmenu.utils.MenuType
 import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val menuItems = listOf(
+            MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
+            MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
+            MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
+            MenuModel(4, "Model 4", getDrawableAsset(R.drawable.linux)),
+            MenuModel(5, "Model 5", getDrawableAsset(R.drawable.hotspot)),
+            MenuModel(6, "Model 6", getDrawableAsset(R.drawable.origin)),
+            MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
+            MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
+        )
+
         button.setOnClickListener {
-            SlidingUpMenu(this, R.menu.landing_page_menu).show {
-                cornerRadius(dimensionInPx = 64)
-                backgroundColor(colorInt = Color.WHITE)
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                icon(R.drawable.zune)
                 titleText(titleText = "A gentle menu")
-                titleColor(R.color.colorAccent)
-                dismissOnMenuItemSelected(false)
-                bodyTextColor(colorInt = Color.BLUE)
+                dismissOnMenuItemSelected(true)
                 scrollDirection(ScrollDirection.HORIZONTAL)
                 menuType(MenuType.GRID)
                 menuModelSelected { slidingUpMenu, menuModel, position ->
@@ -58,4 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getDrawableAsset(@DrawableRes drawableRes: Int) =
+        ContextCompat.getDrawable(this, drawableRes)
 }

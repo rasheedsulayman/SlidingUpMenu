@@ -14,7 +14,7 @@
         app:showAsAction="never" />
 
     <item
-        android:icon="@drawable/gmail"
+        android:icon="@drawable/zune"
         android:id="@+id/menu_three"
         android:title="Menu 3"
         app:showAsAction="never" />
@@ -26,12 +26,13 @@
         app:showAsAction="never" />
 
     <item
-        android:icon="@drawable/google_earth"
+        android:icon="@drawable/radar"
         android:title="Menu 6"
         android:id="@+id/menu_five"
         app:showAsAction="never" />
+
     <item
-        android:icon="@drawable/google_play"
+        android:icon="@drawable/starbucks"
         android:title="Menu 7"
         android:id="@+id/menu_six"
         app:showAsAction="never" />
@@ -78,13 +79,12 @@
         android:id="@+id/menu_fourteen"
         app:showAsAction="never" />
     <item
-        android:icon="@drawable/vlc"
+        android:icon="@drawable/avast"
         android:title="Menu 15"
         android:id="@+id/menu_fifteen"
         app:showAsAction="never" />
-
     <item
-        android:icon="@drawable/radar"
+        android:icon="@drawable/hotspot"
         android:title="Menu 16"
         android:id="@+id/menu_sixteen"
         app:showAsAction="never" />
@@ -94,5 +94,4 @@
         android:title="Menu 17"
         android:id="@+id/menu_seventeen"
         app:showAsAction="never" />
-
 </menu>
