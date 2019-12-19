@@ -16,14 +16,10 @@ import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 internal class MenuRecyclerView(
     private val menuItems: List<MenuModel>,
     private val slidingUpMenu: SlidingUpMenu,
-    private val itemPositionOffset: Int
+    itemPositionOffset: Int
 ) : RecyclerView(slidingUpMenu.context) {
 
     init {
-        setUpViews()
-    }
-
-    private fun setUpViews() {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         layoutManager = when (slidingUpMenu.menuType) {
             MenuType.LIST -> LinearLayoutManager(context)
