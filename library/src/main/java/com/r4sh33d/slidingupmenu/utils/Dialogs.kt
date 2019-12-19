@@ -21,24 +21,21 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.*
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.r4sh33d.slidingupmenu.R
 import com.r4sh33d.slidingupmenu.SlidingUpMenu
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.assertOneSet
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.ifNotZero
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.maybeSetTextColor
-import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveDrawable
-import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveString
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveColor
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveColors
-import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.ifNotZero
-
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveDrawable
+import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveString
 
 internal fun SlidingUpMenu.populateIcon(
     imageView: ImageView,

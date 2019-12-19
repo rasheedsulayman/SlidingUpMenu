@@ -18,21 +18,9 @@ package com.r4sh33d.slidingupmenu.utils
 
 import android.R.attr
 import android.content.Context
-import android.content.res.ColorStateList
-import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.RippleDrawable
-import android.text.Editable
 import android.text.Html
-import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.view.WindowManager
-import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.*
 import androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP

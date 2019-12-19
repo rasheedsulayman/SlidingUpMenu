@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
         )
 
         button.setOnClickListener {
-            SlidingUpMenu(this, R.menu.sample_menu).show {
+            SlidingUpMenu(this, R.menu.sample_menu, menuItems).show {
                 icon(R.drawable.zune)
                 titleText(titleText = "A gentle menu")
                 dismissOnMenuItemSelected(true)
                 scrollDirection(ScrollDirection.HORIZONTAL)
                 menuType(MenuType.GRID)
-                menuModelSelected { slidingUpMenu, menuModel, position ->
+                menuModelSelected { _, menuModel, position ->
                     Toast.makeText(
                         this@MainActivity,
                         "Item selected ${menuModel.title} at position: $position",
