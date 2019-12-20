@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_one"
+        android:title="Menu 1"
+        android:icon="@drawable/flight_track"
+        app:showAsAction="never" />
+    <item
+        android:icon="@drawable/avast"
+        android:id="@+id/menu_two"
+        android:title="Menu 2"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/zune"
+        android:id="@+id/menu_three"
+        android:title="Menu 3"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/hotspot"
+        android:id="@+id/menu_four"
+        android:title="Menu 5"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/radar"
+        android:title="Menu 6"
+        android:id="@+id/menu_five"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/starbucks"
+        android:title="Menu 7"
+        android:id="@+id/menu_six"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/google_docs"
+        android:title="Menu 8"
+        android:id="@+id/menu_eight"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/linux"
+        android:title="Menu 9"
+        android:id="@+id/menu_nine"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/origin"
+        android:title="Menu 10"
+        android:id="@+id/menu_ten"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/radar"
+        android:title="Menu 11"
+        android:id="@+id/menu_eleven"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/shazam"
+        android:title="Menu 12"
+        android:id="@+id/menu_twelve"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/starbucks"
+        android:title="Menu 13"
+        android:id="@+id/menu_thirteen"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/radar"
+        android:title="Menu 14"
+        android:id="@+id/menu_fourteen"
+        app:showAsAction="never" />
+    <item
+        android:icon="@drawable/avast"
+        android:title="Menu 15"
+        android:id="@+id/menu_fifteen"
+        app:showAsAction="never" />
+    <item
+        android:icon="@drawable/hotspot"
+        android:title="Menu 16"
+        android:id="@+id/menu_sixteen"
+        app:showAsAction="never" />
+
+    <item
+        android:icon="@drawable/zune"
+        android:title="Menu 17"
+        android:id="@+id/menu_seventeen"
+        app:showAsAction="never" />
+</menu>

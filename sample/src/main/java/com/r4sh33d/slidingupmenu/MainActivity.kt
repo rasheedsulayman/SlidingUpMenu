@@ -15,20 +15,24 @@
  */
 package com.r4sh33d.slidingupmenu
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import com.r4sh33d.R
 import com.r4sh33d.slidingupmenu.utils.MenuModel
-import com.r4sh33d.slidingupmenu.utils.MenuType
-import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val menuItems = listOf(
+    private val menuItems = listOf(
         MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
         MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
         MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
@@ -39,42 +43,78 @@ class MainActivity : AppCompatActivity() {
         MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
     )
 
+    private lateinit var sharedPreference: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreference = getPreferences(Context.MODE_PRIVATE)
+        setTheme(getActivityTheme())
         setContentView(R.layout.activity_main)
         setUpSample()
+    }
 
-        button.setOnClickListener {
-            SlidingUpMenu(this, R.menu.sample_menu, menuItems).show {
-                icon(R.drawable.zune)
-                titleText(titleText = "A gentle menu")
-                dismissOnMenuItemSelected(true)
-                scrollDirection(ScrollDirection.HORIZONTAL)
-                menuType(MenuType.GRID)
-                menuModelSelected { _, menuModel, position ->
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Item selected ${menuModel.title} at position: $position",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val theme = when (item.itemId) {
+            R.id.dark_theme -> DARK_THEME
+            R.id.custom_style_theme -> CUSTOM_RESOURCE_THEME
+            else -> LIGHT_THEME
         }
+        sharedPreference.edit(true) {
+            putString(KEY_THEME, theme)
+        }
+        recreate()
+        return true
     }
 
     private fun setUpSample() {
-        basic_menu_resource.setOnClickListener {  }
-        basic_array_list.setOnClickListener {  }
-        grid_horizontal.setOnClickListener {  }
-        list_horizontal.setOnClickListener {  }
-        grid_vertical.setOnClickListener {  }
-        list_vertical.setOnClickListener {  }
-        basic_icon.setOnClickListener {  }
-        menu_resource_dynamic_list.setOnClickListener {  }
-        custom_styling.setOnClickListener {  }
-    }
 
+        basic_menu_resource.setOnClickListener {
+
+        }
+
+        basic_array_list.setOnClickListener {
+
+        }
+
+        grid_horizontal.setOnClickListener {
+
+        }
+
+        list_horizontal.setOnClickListener {
+
+        }
+
+        grid_vertical.setOnClickListener {
+
+        }
+
+        list_vertical.setOnClickListener { }
+        basic_icon.setOnClickListener { }
+        menu_resource_dynamic_list.setOnClickListener { }
+        custom_styling.setOnClickListener { }
+    }
 
     private fun getDrawableAsset(@DrawableRes drawableRes: Int) =
         ContextCompat.getDrawable(this, drawableRes)
+
+    @StyleRes
+    private fun getActivityTheme(): Int =
+        when (sharedPreference.getString(KEY_THEME, LIGHT_THEME)) {
+            DARK_THEME -> R.style.AppThemeDark
+            LIGHT_THEME -> R.style.AppThemeLight
+            CUSTOM_RESOURCE_THEME -> R.style.AppThemeLight_CustomResource
+            else -> R.style.AppThemeLight
+        }
+
+    companion object {
+        private const val KEY_THEME = "theme_key"
+        private const val DARK_THEME = "dark_theme"
+        private const val LIGHT_THEME = "light_theme"
+        private const val CUSTOM_RESOURCE_THEME = "custom_resource_theme"
+    }
 }

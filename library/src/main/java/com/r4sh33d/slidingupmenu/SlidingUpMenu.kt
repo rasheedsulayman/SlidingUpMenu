@@ -54,9 +54,7 @@ class SlidingUpMenu(
     internal var scrollDirection = ScrollDirection.HORIZONTAL
     internal var menuModelSelectedListener: MenuModelSelectedListener? = null
     internal var dismissMenuOnItemSelected: Boolean = true
-
-    var titleTextFont: Typeface? = null
-        internal set
+    private var titleTextFont: Typeface? = null
     var bodyTextFont: Typeface? = null
         internal set
     private var cornerRadius: Float? = null
@@ -195,7 +193,7 @@ class SlidingUpMenu(
         }
     }
 
-    fun logMessage(message: String) {
+    private fun logMessage(message: String) {
         Log.d("SlidingUpMenu", message)
     }
 }
