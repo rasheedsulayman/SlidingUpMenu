@@ -28,20 +28,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    val menuItems = listOf(
+        MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
+        MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
+        MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
+        MenuModel(4, "Model 4", getDrawableAsset(R.drawable.linux)),
+        MenuModel(5, "Model 5", getDrawableAsset(R.drawable.hotspot)),
+        MenuModel(6, "Model 6", getDrawableAsset(R.drawable.origin)),
+        MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
+        MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val menuItems = listOf(
-            MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
-            MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
-            MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
-            MenuModel(4, "Model 4", getDrawableAsset(R.drawable.linux)),
-            MenuModel(5, "Model 5", getDrawableAsset(R.drawable.hotspot)),
-            MenuModel(6, "Model 6", getDrawableAsset(R.drawable.origin)),
-            MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
-            MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
-        )
+        setUpSample()
 
         button.setOnClickListener {
             SlidingUpMenu(this, R.menu.sample_menu, menuItems).show {
@@ -60,6 +61,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setUpSample() {
+        basic_menu_resource.setOnClickListener {  }
+        basic_array_list.setOnClickListener {  }
+        grid_horizontal.setOnClickListener {  }
+        list_horizontal.setOnClickListener {  }
+        grid_vertical.setOnClickListener {  }
+        list_vertical.setOnClickListener {  }
+        basic_icon.setOnClickListener {  }
+        menu_resource_dynamic_list.setOnClickListener {  }
+        custom_styling.setOnClickListener {  }
+    }
+
 
     private fun getDrawableAsset(@DrawableRes drawableRes: Int) =
         ContextCompat.getDrawable(this, drawableRes)
