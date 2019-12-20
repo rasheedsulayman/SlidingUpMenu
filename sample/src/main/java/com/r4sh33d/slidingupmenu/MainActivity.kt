@@ -16,7 +16,6 @@
 package com.r4sh33d.slidingupmenu
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -29,33 +28,31 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.r4sh33d.R
 import com.r4sh33d.slidingupmenu.utils.MenuModel
-import com.r4sh33d.slidingupmenu.utils.MenuType
 import com.r4sh33d.slidingupmenu.utils.MenuType.*
-import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 import com.r4sh33d.slidingupmenu.utils.ScrollDirection.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.FieldPosition
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreference: SharedPreferences
 
-    private val menuItems = listOf(
-        MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
-        MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
-        MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
-        MenuModel(4, "Model 4", getDrawableAsset(R.drawable.linux)),
-        MenuModel(5, "Model 5", getDrawableAsset(R.drawable.hotspot)),
-        MenuModel(6, "Model 6", getDrawableAsset(R.drawable.origin)),
-        MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
-        MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
-    )
+    private lateinit var menuItems: List<MenuModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = getPreferences(Context.MODE_PRIVATE)
         setTheme(getActivityTheme())
         setContentView(R.layout.activity_main)
+        menuItems = listOf(
+            MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
+            MenuModel(2, "Model 2", getDrawableAsset(R.drawable.zune)),
+            MenuModel(3, "Model 3", getDrawableAsset(R.drawable.zune)),
+            MenuModel(4, "Model 4", getDrawableAsset(R.drawable.linux)),
+            MenuModel(5, "Model 5", getDrawableAsset(R.drawable.hotspot)),
+            MenuModel(6, "Model 6", getDrawableAsset(R.drawable.origin)),
+            MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
+            MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
+        )
         setUpSample()
     }
 

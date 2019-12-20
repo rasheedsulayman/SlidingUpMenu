@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -10,19 +10,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/MenuOverflowStyle</item>
+    </style>
+
+    <style name="MenuOverflowStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
     </style>
 
     <style name="AppThemeLight.CustomResource">
-        <item name="sm_corner_radius">32dp</item>
+        <item name="sm_corner_radius">34dp</item>
         <item name="sm_title_text_font">@font/fugaz_one</item>
         <item name="sm_body_text_font">@font/maven_pro</item>
-        <item name="sm_background_color">#223728</item>
+        <item name="sm_background_color">#69776D</item>
         <item name="sm_body_text_color">@android:color/holo_orange_light</item>
         <item name="sm_title_text_color">@color/colorAccent</item>
         <item name="sm_ripple_color">#6333B5E5</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="backgroundTint">@color/colorAccent</item>
         <item name="cornerRadius">16dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_width">match_parent</item>
