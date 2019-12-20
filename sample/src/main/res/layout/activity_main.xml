@@ -50,10 +50,5 @@
             style="@style/AppTheme.Button"
             android:text="Menu Resource + ArrayList" />
 
-        <Button
-            android:id="@+id/custom_styling"
-            style="@style/AppTheme.Button"
-            android:text="Styling from theme" />
-
     </LinearLayout>
 </ScrollView>

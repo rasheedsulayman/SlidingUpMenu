@@ -21,6 +21,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
@@ -28,9 +29,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.r4sh33d.R
 import com.r4sh33d.slidingupmenu.utils.MenuModel
+import com.r4sh33d.slidingupmenu.utils.MenuType
+import com.r4sh33d.slidingupmenu.utils.MenuType.*
+import com.r4sh33d.slidingupmenu.utils.ScrollDirection
+import com.r4sh33d.slidingupmenu.utils.ScrollDirection.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.FieldPosition
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreference: SharedPreferences
 
     private val menuItems = listOf(
         MenuModel(1, "Model 1", getDrawableAsset(R.drawable.avast)),
@@ -42,8 +50,6 @@ class MainActivity : AppCompatActivity() {
         MenuModel(7, "Model 7", getDrawableAsset(R.drawable.radar)),
         MenuModel(8, "Model 8", getDrawableAsset(R.drawable.google_docs))
     )
-
-    private lateinit var sharedPreference: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,29 +80,86 @@ class MainActivity : AppCompatActivity() {
     private fun setUpSample() {
 
         basic_menu_resource.setOnClickListener {
-
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                menuModelSelected { slidingUpMenu, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
         }
 
         basic_array_list.setOnClickListener {
-
+            SlidingUpMenu(this, menuModelItems = menuItems).show {
+                titleText(R.string.basic_title)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
         }
 
         grid_horizontal.setOnClickListener {
-
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                scrollDirection(HORIZONTAL)
+                menuType(GRID)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
         }
 
         list_horizontal.setOnClickListener {
-
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                scrollDirection(HORIZONTAL)
+                menuType(LIST)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
         }
 
         grid_vertical.setOnClickListener {
-
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                scrollDirection(VERTICAL)
+                menuType(GRID)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
         }
 
-        list_vertical.setOnClickListener { }
-        basic_icon.setOnClickListener { }
-        menu_resource_dynamic_list.setOnClickListener { }
-        custom_styling.setOnClickListener { }
+        list_vertical.setOnClickListener {
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                scrollDirection(VERTICAL)
+                menuType(LIST)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
+        }
+
+        basic_icon.setOnClickListener {
+            SlidingUpMenu(this, R.menu.sample_menu).show {
+                titleText(R.string.basic_title)
+                icon(R.drawable.hotspot)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
+        }
+
+        menu_resource_dynamic_list.setOnClickListener {
+            SlidingUpMenu(this, R.menu.sample_menu, menuItems).show {
+                titleText(R.string.basic_title)
+                icon(R.drawable.hotspot)
+                menuModelSelected { _, menuModel, position ->
+                    showClick(menuModel, position)
+                }
+            }
+        }
     }
 
     private fun getDrawableAsset(@DrawableRes drawableRes: Int) =
@@ -110,6 +173,12 @@ class MainActivity : AppCompatActivity() {
             CUSTOM_RESOURCE_THEME -> R.style.AppThemeLight_CustomResource
             else -> R.style.AppThemeLight
         }
+
+    private fun showToast(message: String) =
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    private fun showClick(menuModel: MenuModel, position: Int) =
+        showToast("Menu item '${menuModel.title}' with id '${menuModel.id}' clicked at position '$position'")
 
     companion object {
         private const val KEY_THEME = "theme_key"
