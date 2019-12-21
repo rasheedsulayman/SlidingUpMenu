@@ -29,6 +29,7 @@ import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.r4sh33d.slidingupmenu.R
 import com.r4sh33d.slidingupmenu.SlidingUpMenu
+import com.r4sh33d.slidingupmenu.extensions.hide
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.assertOneSet
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.ifNotZero
 import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.maybeSetTextColor
@@ -58,7 +59,8 @@ internal fun SlidingUpMenu.populateText(
     text: CharSequence? = null,
     @StringRes fallback: Int = 0,
     typeface: Typeface?,
-    textColor: Int? = null
+    textColor: Int? = null,
+    canHideParent: Boolean = false
 ) {
     val value = text ?: resolveString(this, textRes, fallback)
     if (value != null) {
@@ -70,7 +72,8 @@ internal fun SlidingUpMenu.populateText(
         }
         textView.maybeSetTextColor(context, textColor)
     } else {
-        textView.visibility = View.GONE
+        textView.hide()
+        if (canHideParent)(textView.parent as View).hide()
     }
 }
 

@@ -118,7 +118,8 @@ class SlidingUpMenu(
             textRes = titleRes,
             text = titleText,
             typeface = titleTextFont,
-            textColor = R.attr.sm_title_text_color
+            textColor = R.attr.sm_title_text_color,
+            canHideParent = true
         )
         return this
     }

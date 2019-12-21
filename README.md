@@ -12,10 +12,9 @@ Add the dependency to your app's `build.gradle`:
 implementation 'com.r4sh33d:SlidingUpMenu:0.0.1'
 ```
 ## Usage
-`HiddenCam` uses `CameraX` under the hood. It is very easy to get started with Hidden cam. 
-First, initialize the camera engine with a `Context`, A `File` that 
-represents the base storage folder where the captured images will be saved to, 
-and an `OnImageCapturedListener` to get capture results:
+It is very easy to get started with `SlidingUpMenu`. Just specify a `Context`, a menu resource file and/or a list of menu model items: 
+
+
 
 ```kotlin
 val hiddenCam = HiddenCam(context, baseStorageFolder, captureListener)

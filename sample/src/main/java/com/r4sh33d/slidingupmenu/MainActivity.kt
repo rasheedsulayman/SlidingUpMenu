@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         basic_menu_resource.setOnClickListener {
             SlidingUpMenu(this, R.menu.sample_menu).show {
-                titleText(R.string.basic_title)
                 menuModelSelected { slidingUpMenu, menuModel, position ->
                     showClick(menuModel, position)
                 }
