@@ -18,12 +18,11 @@ internal class ViewPagerAdapter(
     override fun getCount(): Int = groupedMenuItemsList.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val recyclerView =
-            MenuRecyclerView(
-                groupedMenuItemsList[position],
-                slidingUpMenu,
-                position * horizontalScrollChunkSize
-            )
+        val recyclerView = MenuRecyclerView(
+            groupedMenuItemsList[position],
+            slidingUpMenu,
+            position * horizontalScrollChunkSize
+        )
         container.addView(recyclerView)
         return recyclerView
     }

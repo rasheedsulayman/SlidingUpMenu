@@ -19,8 +19,7 @@ import com.r4sh33d.slidingupmenu.views.WidthFitSquareImageView
 internal class MenuModelAdapter(
     private val slidingUpMenu: SlidingUpMenu,
     private val itemPositionOffset: Int
-) :
-    ListAdapter<MenuModel, MenuModelAdapter.GridItemViewHolder>(DiffCallback) {
+) : ListAdapter<MenuModel, MenuModelAdapter.GridItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridItemViewHolder {
         return GridItemViewHolder(
