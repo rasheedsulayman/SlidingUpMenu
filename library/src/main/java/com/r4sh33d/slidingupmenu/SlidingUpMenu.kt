@@ -32,6 +32,7 @@ import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
 
+//TODO add cancelable on touch outside to the docs
 
 class SlidingUpMenu(
     context: Context,

@@ -12,8 +12,37 @@ Add the dependency to your app's `build.gradle`:
 implementation 'com.r4sh33d:SlidingUpMenu:0.0.1'
 ```
 ## Usage
-It is very easy to get started with `SlidingUpMenu`. Just specify a `Context`, a menu resource file and/or a list of menu model items: 
+It is very easy to get started with `SlidingUpMenu`. Just specify a `Context`, a menu resource file: 
 
+```kotlin
+SlidingUpMenu(this, R.menu.sample_menu).show()
+```
+### Title
+
+You can specify the title for the menu dialog by supplying a `String` id to the `titleText` method.  
+
+```kotlin
+SlidingUpMenu(this, R.menu.sample_menu).show {
+   titleText(R.string.basic_title)
+}
+```
+
+You can also specify a `String` for the title:
+
+```kotlin
+titleText(titleText = "Basic Title")
+```
+
+### Title
+
+```kotlin
+SlidingUpMenu(this, R.menu.sample_menu).show {
+   titleText(R.string.basic_title)
+   menuModelSelected { slidingUpMenu, menuModel, position ->
+      showClick(menuModel, position)
+   }
+}
+```
 
 
 ```kotlin
