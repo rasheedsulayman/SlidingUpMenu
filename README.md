@@ -17,6 +17,28 @@ It is very easy to get started with `SlidingUpMenu`. Just specify a `Context`, a
 ```kotlin
 SlidingUpMenu(this, R.menu.sample_menu).show()
 ```
+
+### Menu Items
+
+You specify the menu items by supplying a `Menu` resource id and/or list of `MenuModel` items. If both menu resource id and list of MenuModel is specified, `SlidingUpMenu` will merge the sources together and present the menu items to users at once:
+
+```kotlin
+SlidingUpMenu(this, R.menu.sample_menu).show() // Menu resource id only
+//or 
+SlidingUpMenu(this, menuModelItems = menuItems).show() // List of MenuModel only
+//or 
+SlidingUpMenu(this, R.menu.sample_menu, menuItems).show() // Menu resource + List of MenuModel
+```
+
+```kotlin
+SlidingUpMenu(this, R.menu.sample_menu).show {
+   titleText(R.string.basic_title)
+   menuModelSelected { slidingUpMenu, menuModel, position ->
+      showClick(menuModel, position)
+   }
+}
+```
+
 ### Title
 
 You can specify the title for the menu dialog by supplying a `String` id to the `titleText` method.  
@@ -31,17 +53,6 @@ You can also specify a `String` for the title:
 
 ```kotlin
 titleText(titleText = "Basic Title")
-```
-
-### Title
-
-```kotlin
-SlidingUpMenu(this, R.menu.sample_menu).show {
-   titleText(R.string.basic_title)
-   menuModelSelected { slidingUpMenu, menuModel, position ->
-      showClick(menuModel, position)
-   }
-}
 ```
 
 

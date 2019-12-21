@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testSample() {
+        SlidingUpMenu(this, R.menu.sample_menu, menuItems).show()
         SlidingUpMenu(this, R.menu.sample_menu).show {
             titleText(titleText = "Basic Title")
             menuModelSelected { slidingUpMenu, menuModel, position ->
