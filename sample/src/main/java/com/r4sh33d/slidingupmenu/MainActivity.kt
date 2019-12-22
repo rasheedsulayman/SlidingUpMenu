@@ -78,8 +78,10 @@ class MainActivity : AppCompatActivity() {
 
         val context = this
         SlidingUpMenu(context, R.menu.sample_menu).show {
-            dismissOnMenuItemSelected(false)
+            scrollDirection(ScrollDirection.HORIZONTAL)
         }
+
+
 
         val slidingUpMenu = SlidingUpMenu(this, R.menu.sample_menu)
         // perform some operations
@@ -95,8 +97,10 @@ class MainActivity : AppCompatActivity() {
         SlidingUpMenu(context, R.menu.sample_menu, menuItems).show()
         SlidingUpMenu(context, R.menu.sample_menu).show {
             titleText(R.string.basic_title)
-            icon(R.drawable.icon)
+            icon(R.drawable.zune)
             menuType(GRID)
+            scrollDirection(HORIZONTAL)
+            cornerRadius(24f)
             menuModelSelected { slidingUpMenu, menuModel, position ->
 
             }

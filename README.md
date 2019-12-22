@@ -126,6 +126,42 @@ Like other `Dialog`s you can also configure the behaviour when users' touch outs
 slidingUpMenu.setCanceledOnTouchOutside(true)
 ```
 
+### Menu Type
+
+You can pass a `MenuType` to the `menuType` method to specify if you want the menu items to be arranged in a list or grid manner. 
+
+#### GRID
+
+```kotlin
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   menuType(MenuType.GRID)
+}
+```
+
+[screenshot of GRID menu layout]
+
+#### GRID
+
+```kotlin
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   menuType(MenuType.LIST)
+}
+```
+
+[screenshot of LIST menu layout]
+
+### Scroll Direction
+
+To control the scrolling direction for the menu items, You specify a `ScrollDirection` to the `scrollDirection` method:
+
+```kotlin
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   scrollDirection(ScrollDirection.HORIZONTAL)
+   //or 
+   scrollDirection(ScrollDirection.VERTICAL)
+}
+```
+
 
 Then prepare the camera for capturing by calling the `start()` method:
  
