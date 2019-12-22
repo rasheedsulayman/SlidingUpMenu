@@ -222,10 +222,38 @@ You can specify colors and fonts for dialog title and body with theme attributes
 </style> 
 ```
 
-[Show Text color and font]
+[Show screenshot Text color and font]
 
+### Background color
 
-`SlidingUpMenu` uses `Dialog` under the hood, so most `Dialog` operations will be available. 
+You can set background color for menu dialog:
+
+```xml
+<style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
+   ...
+   <item name="sm_background_color">@color/menuBackground</item>
+   ...
+</style>
+```
+
+[Screen shot for the background color]
+
+### Ripple color
+
+You can set the color for to use as background when menu items are selected:
+
+```xml
+<style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
+   ...
+   <item name="sm_ripple_color">@color/rippleColor</item>
+   ...
+</style>
+```
+
+[Horizontal line]
+
+`SlidingUpMenu` uses `Dialog` under the hood, so most standard `Dialog` operations should also be available.
+ You can also check out MaterialDialogs for more customizable set of Dialogs.  
 
 ##  License
 
