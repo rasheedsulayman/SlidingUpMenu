@@ -36,7 +36,7 @@ import kotlin.math.min
 
 class SlidingUpMenu(
     context: Context,
-    @MenuRes val menuResource: Int? = null,
+    @MenuRes private val menuResource: Int? = null,
     private val menuModelItems: List<MenuModel>? = null
 ) : BottomSheetDialog(context, getDialogTheme(context)) {
 

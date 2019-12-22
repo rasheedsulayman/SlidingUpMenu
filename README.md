@@ -12,10 +12,11 @@ Add the dependency to your app's `build.gradle`:
 implementation 'com.r4sh33d:SlidingUpMenu:0.0.1'
 ```
 ## Usage
+
 It is very easy to get started with `SlidingUpMenu`. Just specify a `Context` and a menu resource file: 
 
 ```kotlin
-SlidingUpMenu(this, R.menu.sample_menu).show()
+SlidingUpMenu(context, R.menu.sample_menu).show()
 ```
 
 [Screenshot of the simplest config]
@@ -26,7 +27,7 @@ SlidingUpMenu(this, R.menu.sample_menu).show()
 You can specify the title for the menu dialog by supplying a `String` id to the `titleText` method.  
 
 ```kotlin
-SlidingUpMenu(this, R.menu.sample_menu).show {
+SlidingUpMenu(context, R.menu.sample_menu).show {
    titleText(R.string.basic_title)
 }
 ```
@@ -44,18 +45,18 @@ titleText(titleText = "Basic Title")
 You specify the menu items by supplying a `Menu` resource id and/or list of `MenuModel` items. If both menu resource id and list of MenuModel is specified, `SlidingUpMenu` will merge the sources together and present the menu items to users at once:
 
 ```kotlin
-SlidingUpMenu(this, R.menu.sample_menu).show() // Menu resource id only
+SlidingUpMenu(context, R.menu.sample_menu).show() // Menu resource id only
 //or 
-SlidingUpMenu(this, menuModelItems = menuItems).show() // List of MenuModel only
+SlidingUpMenu(context, menuModelItems = menuItems).show() // List of MenuModel only
 //or 
-SlidingUpMenu(this, R.menu.sample_menu, menuItems).show() // Menu resource + List of MenuModel
+SlidingUpMenu(context, R.menu.sample_menu, menuItems).show() // Menu resource + List of MenuModel
 ```
 ### Callback
 
 To receive item selected events, You specify a `MenuModelSelectedListener` to the `menuModelSelected` method. The `menuModelSelected` method takes in a lambda that will be called with the selected `MenuModel`, the position of the `MenuModel` and the `SlidingUpMenu` instance.
  
  ```kotlin
- SlidingUpMenu(this, R.menu.sample_menu).show {
+ SlidingUpMenu(context, R.menu.sample_menu).show {
     titleText(R.string.basic_title)
     menuModelSelected { slidingUpMenu, menuModel, position ->
         //   
@@ -67,7 +68,7 @@ You can identify the selected menu item by querying the `menuModel.id` or using 
 
 ```kotlin
 
-SlidingUpMenu(this, R.menu.sample_menu).show {
+SlidingUpMenu(context, R.menu.sample_menu).show {
    titleText(titleText = "Basic Title")
    menuModelSelected { slidingUpMenu, menuModel, position ->
    when (menuModel.id) {
@@ -79,20 +80,56 @@ SlidingUpMenu(this, R.menu.sample_menu).show {
    }
 }
 ```
-### Showing and dismissing menu
-
-You can create and immediately show the dialog, as seen the sample code snippets above. Alternatively, you can create and configure the `SlidingUpMenu` instance, and show at a later time:
-
-
+### Showing and Dismissing Menu
+#### Showing Menu
+You can create and immediately show the dialog, as seen the sample code snippets above. Just call the show() method variant that takes in a configuration block. You can add configurations in the block. `SlidingUpMenu` will apply the configuration and show the dialog immediately:  
 
 ```kotlin
-val hiddenCam = HiddenCam(context, baseStorageFolder, captureListener)
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   // Configuration block
+   titleText(R.string.basic_title)
+   icon(R.drawable.icon)
+   menuType(GRID)
+   // ...
+}
 ```
+
+Alternatively, you can create and configure the `SlidingUpMenu` instance, and show at a later time:
+
+```kotlin
+val slidingUpMenu = SlidingUpMenu(context, R.menu.sample_menu)
+// perform some operations
+slidingUpMenu.titleText(R.string.basic_title)
+   .icon(R.drawable.icon)
+   .menuType(GRID)
+   //...
+// Then after some time.
+slidingUpMenu.show()
+```
+#### Dismissing Menu
+
+By default, `SlidingMenu` will automatically be dismissed anytime a menu item is selected. You can control this behaviour:
+
+```kotlin
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   dismissOnMenuItemSelected(false)
+}
+```
+If you disable auto-dismiss, you need to manually dismiss the menu dialog. 
+
+```kotlin
+slidingUpMenu.dismiss()
+```
+Like other `Dialog`s you can also configure the behaviour when users' touch outside the dialog content:
+
+```kotlin
+slidingUpMenu.setCanceledOnTouchOutside(true)
+```
+
+
 Then prepare the camera for capturing by calling the `start()` method:
  
-```kotlin
-hiddenCam.start()
-```
+
 You can now start capturing images with:
 ```kotlin
 hiddenCam.captureImage()
@@ -178,6 +215,9 @@ hiddenCam = HiddenCam(
             captureFrequency = Recurring(captureIntervalMillis = 15 * 1000)
         )
 ```
+
+`SlidingUpMenu` uses `Dialog` under the hood, so most `Dialog` operations will be available.
+
 
 ##  License
 

@@ -76,16 +76,29 @@ class MainActivity : AppCompatActivity() {
 
     fun testSample() {
 
-        SlidingUpMenu(this, R.menu.sample_menu, menuItems).show()
-        SlidingUpMenu(this, R.menu.sample_menu).show {
-            titleText(titleText = "Basic Title")
+        val context = this
+        SlidingUpMenu(context, R.menu.sample_menu).show {
+            dismissOnMenuItemSelected(false)
+        }
+
+        val slidingUpMenu = SlidingUpMenu(this, R.menu.sample_menu)
+        // perform some operations
+        slidingUpMenu.titleText(R.string.basic_title)
+            .icon(R.drawable.icon)
+            .menuType(GRID)
+        //...
+        // Then after some time
+        slidingUpMenu.show()
+
+        slidingUpMenu.setCanceledOnTouchOutside(true)
+
+        SlidingUpMenu(context, R.menu.sample_menu, menuItems).show()
+        SlidingUpMenu(context, R.menu.sample_menu).show {
+            titleText(R.string.basic_title)
+            icon(R.drawable.icon)
+            menuType(GRID)
             menuModelSelected { slidingUpMenu, menuModel, position ->
-                when (menuModel.id) {
-                    R.id.menu_one -> TODO()
-                    R.id.menu_two -> TODO()
-                    R.id.menu_three -> TODO()
-                    //...
-                }
+
             }
         }
     }
