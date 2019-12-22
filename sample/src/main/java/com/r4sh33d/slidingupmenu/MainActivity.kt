@@ -75,11 +75,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testSample() {
+
         SlidingUpMenu(this, R.menu.sample_menu, menuItems).show()
         SlidingUpMenu(this, R.menu.sample_menu).show {
             titleText(titleText = "Basic Title")
             menuModelSelected { slidingUpMenu, menuModel, position ->
-                showClick(menuModel, position)
+                when (menuModel.id) {
+                    R.id.menu_one -> TODO()
+                    R.id.menu_two -> TODO()
+                    R.id.menu_three -> TODO()
+                    //...
+                }
             }
         }
     }
