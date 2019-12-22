@@ -78,10 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         val context = this
         SlidingUpMenu(context, R.menu.sample_menu).show {
-            icon(R.drawable.icon)
-            icon(drawable = drawbleIcon)
+            cornerRadius(16f)
+            cornerRadius(R.dimen.cornerRadius)
         }
-
 
 
         val slidingUpMenu = SlidingUpMenu(this, R.menu.sample_menu)
@@ -98,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         SlidingUpMenu(context, R.menu.sample_menu, menuItems).show()
         SlidingUpMenu(context, R.menu.sample_menu).show {
             //titleText(R.string.basic_title)
-            icon(R.drawable.zune)
+          //  icon(R.drawable.zune)
             //menuType(GRID)
             //scrollDirection(HORIZONTAL)
             cornerRadius(24f)

@@ -81,6 +81,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 }
 ```
 ### Showing and Dismissing Menu
+
 #### Showing Menu
 You can create and immediately show the dialog, as seen the sample code snippets above. Just call the show() method variant that takes in a configuration block. You can add configurations in the block. `SlidingUpMenu` will apply the configuration and show the dialog immediately:  
 
@@ -140,7 +141,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 
 [screenshot of GRID menu layout]
 
-#### GRID
+#### LIST
 
 ```kotlin
 SlidingUpMenu(context, R.menu.sample_menu).show {
@@ -177,10 +178,54 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 
 [Show icon screenshot]
 
+## Theming 
+
+### Corner Radius
+
+You can get rounded edges by specifying a corner radius to the menu dialog:
+
+```kotlin
+SlidingUpMenu(context, R.menu.sample_menu).show {
+   cornerRadius(16f) // 16dp
+   // or 
+   cornerRadius(R.dimen.cornerRadius) // from dimens resource
+}
+```
+
+You can also specify the corner radius as an attribute in your theme style definition.
 
 
-`SlidingUpMenu` uses `Dialog` under the hood, so most `Dialog` operations will be available.
+```xml
+<style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
+   ...
+   <item name="sm_corner_radius">24dp</item>
+   ...
+</style>
+```
 
+[Show corner radius screenshot]
+
+### Corner Radius
+
+### Text Color and Font
+
+You can specify colors and fonts for dialog title and body with theme attributes:
+
+```xml
+<style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
+   ...
+   <item name="sm_title_text_font">@font/fugaz_one</item>
+   <item name="sm_title_text_color">@color/colorAccent</item>
+   <item name="sm_body_text_font">@font/maven_pro</item>
+   <item name="sm_body_text_color">@android:color/holo_orange_light</item>
+   ...
+</style> 
+```
+
+[Show Text color and font]
+
+
+`SlidingUpMenu` uses `Dialog` under the hood, so most `Dialog` operations will be available. 
 
 ##  License
 

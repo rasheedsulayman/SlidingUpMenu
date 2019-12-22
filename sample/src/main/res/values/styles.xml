@@ -1,5 +1,18 @@
 <resources>
 
+
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        ...
+        <item name="sm_title_text_font">@font/fugaz_one</item>
+        <item name="sm_title_text_color">@color/colorAccent</item>
+        <item name="sm_body_text_font">@font/maven_pro</item>
+        <item name="sm_body_text_color">@android:color/holo_orange_light</item>
+        ...
+    </style>
+
+
+    -----------------
+
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
