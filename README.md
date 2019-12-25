@@ -2,7 +2,7 @@
 
 ##  \[ 🚧 Work in progress 🛠 👷🔧👷‍♀️️🔧️ 🚧 \]
 
-<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/snippet_screen.png" width="300"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/snippet_screen.png" width="600"/>
 
 ## Gradle Dependency
 
