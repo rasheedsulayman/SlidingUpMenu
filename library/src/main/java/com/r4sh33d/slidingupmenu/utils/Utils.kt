@@ -15,7 +15,7 @@
  */
 package com.r4sh33d.slidingupmenu.utils
 
-// Todo calculate chunk size based on available space.
+// TODO calculate chunk size based on available space.
 internal const val horizontalScrollChunkSize = 8
 
 internal fun splitMenuList(

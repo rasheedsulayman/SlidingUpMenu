@@ -42,7 +42,7 @@ publish {
   groupId = 'com.r4sh33d'
   artifactId = 'SlidingUpMenu'
   publishVersion = versions.publishVersion
-  desc = 'A library that ...'
+  desc = '🚀 A library that allows you to present menu items (from menu resource and/or other sources) to users as a bottom sheet.'
   website = 'https://github.com/r4sh33d/SlidingUpMenu'
   dryRun = false
 }
