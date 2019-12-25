@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
     private fun setUpSample() {
 
         basic_menu_resource.setOnClickListener {
