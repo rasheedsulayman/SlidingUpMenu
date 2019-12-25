@@ -257,8 +257,7 @@ You can set the color for to use as background when menu items are selected:
 ---
 
 `SlidingUpMenu` uses [Dialog](https://developer.android.com/reference/android/app/Dialog.html) under the hood, so most standard `Dialog` operations should also be available.
- You can also check out [MaterialDialogs](https://github.com/afollestad/material-dialogs) for more customizable set of Dialogs.  
-
+ You can also check out [MaterialDialogs](https://github.com/afollestad/material-dialogs) for more customizable set of Dialogs. The icons used in the screenshots are from [here](https://forum.xda-developers.com/showthread.php?t=2798349) 
 
 ##  License
 
