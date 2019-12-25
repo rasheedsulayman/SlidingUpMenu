@@ -1,5 +1,10 @@
 # SlidingUpMenu
 
+A library that allows you to present menu items (from menu resource and/or other sources) to users as a bottom sheet.
+
+[![Build Status](https://travis-ci.com/r4sh33d/SlidingUpMenu.svg?branch=master)](https://travis-ci.com/r4sh33d/SlidingUpMenu)
+[ ![Download](https://api.bintray.com/packages/r4sh33d/maven/SlidingUpMenu/images/download.svg) ](https://bintray.com/r4sh33d/maven/SlidingUpMenu/_latestVersion)
+
 ##  \[ 🚧 Work in progress 🛠 👷🔧👷‍♀️️🔧️ 🚧 \]
 
 <img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/snippet_screen_a.png" width="600"/>
