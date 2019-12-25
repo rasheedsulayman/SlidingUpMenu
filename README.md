@@ -19,7 +19,7 @@ It is very easy to get started with `SlidingUpMenu`. Just specify a `Context` an
 SlidingUpMenu(context, R.menu.sample_menu).show()
 ```
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_basic_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_basic_pixel_very_silver_portrait.png" width="230"/>
 
 
 ### Title
@@ -38,7 +38,7 @@ You can also specify a `String` for the title:
 titleText(titleText = "Basic Title")
 ```
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="230"/>
 
 ### Menu Items
 
@@ -138,7 +138,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
    menuType(MenuType.GRID)
 }
 ```
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="230"/>
 
 #### LIST
 
@@ -148,7 +148,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 }
 ```
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_list_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_list_pixel_very_silver_portrait.png" width="230"/>
 
 ### Scroll Direction
 
@@ -175,7 +175,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 }
 ```
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_icon_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_icon_pixel_very_silver_portrait.png" width="230"/>
 
 ## Theming 
 
@@ -203,7 +203,7 @@ You can also specify the corner radius as an attribute in your theme style defin
 ```
 
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_round_corner_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_round_corner_pixel_very_silver_portrait.png" width="230"/>
 
 ### Corner Radius
 
@@ -223,7 +223,7 @@ You can specify colors and fonts for dialog title and body with theme attributes
 ```
 
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_font_color_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_font_color_pixel_very_silver_portrait.png" width="230"/>
 
 
 ### Background color
@@ -239,7 +239,7 @@ You can set background color for menu dialog:
 ```
 
 
-<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_bg_pixel_very_silver_portrait.png" width="250"/>
+<img src="https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_bg_pixel_very_silver_portrait.png" width="230"/>
 
 
 ### Ripple color
@@ -257,7 +257,7 @@ You can set the color for to use as background when menu items are selected:
 ---
 
 `SlidingUpMenu` uses [Dialog](https://developer.android.com/reference/android/app/Dialog.html) under the hood, so most standard `Dialog` operations should also be available.
- You can also check out [MaterialDialogs](https://github.com/afollestad/material-dialogs) for more customizable set of Dialogs. The icons used in the screenshots are from [here](https://forum.xda-developers.com/showthread.php?t=2798349) 
+ You can also check out [MaterialDialogs](https://github.com/afollestad/material-dialogs) for more customizable set of Dialogs. The icons used in the screenshots are from [here](https://forum.xda-developers.com/showthread.php?t=2798349).
 
 ##  License
 
