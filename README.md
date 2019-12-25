@@ -19,7 +19,7 @@ It is very easy to get started with `SlidingUpMenu`. Just specify a `Context` an
 SlidingUpMenu(context, R.menu.sample_menu).show()
 ```
 
-[Screenshot of the simplest config]
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_basic_pixel_very_silver_portrait.png" width="500"/>
 
 
 ### Title
@@ -38,7 +38,7 @@ You can also specify a `String` for the title:
 titleText(titleText = "Basic Title")
 ```
 
-[Screenshot of a title]
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="500"/>
 
 ### Menu Items
 
@@ -138,8 +138,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
    menuType(MenuType.GRID)
 }
 ```
-
-[screenshot of GRID menu layout]
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_title_pixel_very_silver_portrait.png" width="500"/>
 
 #### LIST
 
@@ -149,7 +148,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 }
 ```
 
-[screenshot of LIST menu layout]
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_list_pixel_very_silver_portrait.png" width="500"/>
 
 ### Scroll Direction
 
@@ -176,7 +175,7 @@ SlidingUpMenu(context, R.menu.sample_menu).show {
 }
 ```
 
-[Show icon screenshot]
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_icon_pixel_very_silver_portrait.png" width="500"/>
 
 ## Theming 
 
@@ -203,7 +202,8 @@ You can also specify the corner radius as an attribute in your theme style defin
 </style>
 ```
 
-[Show corner radius screenshot]
+
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_round_corner_pixel_very_silver_portrait.png" width="500"/>
 
 ### Corner Radius
 
@@ -222,7 +222,9 @@ You can specify colors and fonts for dialog title and body with theme attributes
 </style> 
 ```
 
-[Show screenshot Text color and font]
+
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_font_color_pixel_very_silver_portrait.png" width="500"/>
+
 
 ### Background color
 
@@ -236,7 +238,9 @@ You can set background color for menu dialog:
 </style>
 ```
 
-[Screen shot for the background color]
+
+<img src="https://https://raw.githubusercontent.com/r4sh33d/SlidingUpMenu/master/screenshots/dialog_custom_bg_pixel_very_silver_portrait.png" width="500"/>
+
 
 ### Ripple color
 
@@ -250,7 +254,7 @@ You can set the color for to use as background when menu items are selected:
 </style>
 ```
 
-[Horizontal line]
+---
 
 `SlidingUpMenu` uses `Dialog` under the hood, so most standard `Dialog` operations should also be available.
  You can also check out MaterialDialogs for more customizable set of Dialogs.  
