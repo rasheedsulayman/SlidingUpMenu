@@ -15,20 +15,13 @@
         <activity
             android:theme="@style/AppThemeLight.CustomResources"
             android:name=".slidingupmenu.SingleTestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".slidingupmenu.MainActivity">
-<!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
--->
         </activity>
 
         <meta-data

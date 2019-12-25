@@ -21,10 +21,11 @@ internal class MenuRecyclerView(
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {
-            val padding = context.dpToPx(16)
-            setPadding(padding, 0, padding, 0)
+            if (slidingUpMenu.menuType == MenuType.GRID) {
+                val padding = context.dpToPx(16)
+                setPadding(padding, 0, padding, 0)
+            }
         }
-
         layoutManager = when (slidingUpMenu.menuType) {
             MenuType.LIST -> LinearLayoutManager(context)
             MenuType.GRID -> object : GridLayoutManager(context, 4) {
@@ -34,7 +35,6 @@ internal class MenuRecyclerView(
             }
         }
         addItemDecoration(GridSpacingItemDecoration(4, context.dpToPx(4)))
-        adapter =
-            MenuModelAdapter(slidingUpMenu, itemPositionOffset).apply { submitList(menuItems) }
+        adapter = MenuModelAdapter(slidingUpMenu, itemPositionOffset).apply { submitList(menuItems) }
     }
 }

@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
-import android.util.Log
 import android.util.TypedValue
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -31,8 +30,6 @@ import com.r4sh33d.slidingupmenu.utils.SlidingUpMenuUtil.resolveDimen
 import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
-
-//TODO add cancelable on touch outside to the docs
 
 class SlidingUpMenu(
     context: Context,
@@ -62,8 +59,7 @@ class SlidingUpMenu(
 
     init {
         setContentView(dialogRootView)
-        rootViewFrameLayoutWrapper =
-            window!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+        rootViewFrameLayoutWrapper = window!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
         setUpWindowContent()
         populateMenuModelItems()
         invalidateBackgroundColorAndRadius()
@@ -105,7 +101,6 @@ class SlidingUpMenu(
         if (scrollDirection == ScrollDirection.HORIZONTAL) {
             dialogRootView.onGlobalLayout {
                 behavior.peekHeight = dialogRootView.height
-                logMessage("dialog height: ${dialogRootView.height}")
             }
         }
     }
@@ -193,9 +188,5 @@ class SlidingUpMenu(
             cornerRadii = getTopLeftCornerRadius(cornerRadius)
             setColor(backgroundColor)
         }
-    }
-
-    private fun logMessage(message: String) {
-        Log.d("SlidingUpMenu", message)
     }
 }
