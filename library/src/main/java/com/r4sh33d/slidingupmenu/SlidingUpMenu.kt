@@ -46,7 +46,7 @@ import com.r4sh33d.slidingupmenu.views.WrapContentViewPager
 import kotlin.math.abs
 import kotlin.math.min
 
-class SlidingUpMenu(
+class SlidingUpMenu @JvmOverloads constructor(
     context: Context,
     @MenuRes private val menuResource: Int? = null,
     private val menuModelItems: List<MenuModel>? = null
