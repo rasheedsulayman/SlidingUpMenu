@@ -1,18 +1,5 @@
 <resources>
 
-
-    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        ...
-        <item name="sm_title_text_font">@font/fugaz_one</item>
-        <item name="sm_title_text_color">@color/colorAccent</item>
-        <item name="sm_body_text_font">@font/maven_pro</item>
-        <item name="sm_body_text_color">@android:color/holo_orange_light</item>
-        ...
-    </style>
-
-
-    -----------------
-
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -38,6 +25,14 @@
         <item name="sm_body_text_color">@android:color/holo_orange_light</item>
         <item name="sm_title_text_color">@color/colorAccent</item>
         <item name="sm_ripple_color">#6333B5E5</item>
+    </style>
+
+    <style name="AppThemeLight.CustomResources">
+        <item name="sm_title_text_font">@font/fugaz_one</item>
+        <item name="sm_title_text_color">@color/colorAccent</item>
+        <item name="sm_body_text_font">@font/maven_pro</item>
+        <item name="sm_body_text_color">#CC2762</item>
+        <item name="sm_background_color">#BFC6CA</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button.Icon">

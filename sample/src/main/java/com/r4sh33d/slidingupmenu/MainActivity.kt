@@ -74,38 +74,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun testSample() {
-
-        val context = this
-        SlidingUpMenu(context, R.menu.sample_menu).show {
-            cornerRadius(16f)
-            cornerRadius(R.dimen.cornerRadius)
-        }
-
-
-        val slidingUpMenu = SlidingUpMenu(this, R.menu.sample_menu)
-        // perform some operations
-        slidingUpMenu.titleText(R.string.basic_title)
-            .icon(R.drawable.icon)
-            .menuType(GRID)
-        //...
-        // Then after some time
-        slidingUpMenu.show()
-
-        slidingUpMenu.setCanceledOnTouchOutside(true)
-
-        SlidingUpMenu(context, R.menu.sample_menu, menuItems).show()
-        SlidingUpMenu(context, R.menu.sample_menu).show {
-            //titleText(R.string.basic_title)
-          //  icon(R.drawable.zune)
-            //menuType(GRID)
-            //scrollDirection(HORIZONTAL)
-            cornerRadius(24f)
-            menuModelSelected { slidingUpMenu, menuModel, position ->
-
-            }
-        }
-    }
 
     private fun setUpSample() {
 
