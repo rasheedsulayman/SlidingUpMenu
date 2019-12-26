@@ -22,7 +22,7 @@ import androidx.viewpager.widget.ViewPager
 import com.r4sh33d.slidingupmenu.utils.ScrollDirection
 
 @SuppressLint("ViewConstructor")
-class WrapContentViewPager(context: Context, private val scrollDirection: ScrollDirection) :
+internal class WrapContentViewPager(context: Context, private val scrollDirection: ScrollDirection) :
     ViewPager(context) {
 
     init {

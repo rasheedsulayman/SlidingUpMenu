@@ -21,15 +21,15 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
 
-fun View.show() {
+internal fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun View.hide() {
+internal fun View.hide() {
     visibility = View.GONE
 }
 
-fun View.invisible() {
+internal fun View.invisible() {
     visibility = View.INVISIBLE
 }
 

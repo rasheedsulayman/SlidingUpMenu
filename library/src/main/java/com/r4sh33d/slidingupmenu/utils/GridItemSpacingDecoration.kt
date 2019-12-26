@@ -19,7 +19,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class GridSpacingItemDecoration(
+internal class GridSpacingItemDecoration(
     private val spanCount: Int,
     private val spacing: Int
 ) : RecyclerView.ItemDecoration() {

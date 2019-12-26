@@ -29,7 +29,7 @@ import com.r4sh33d.slidingupmenu.R
 import com.r4sh33d.slidingupmenu.SlidingUpMenu
 
 @RestrictTo(LIBRARY_GROUP)
-object SlidingUpMenuUtil {
+internal object SlidingUpMenuUtil {
 
     @RestrictTo(LIBRARY_GROUP)
     fun resolveString(

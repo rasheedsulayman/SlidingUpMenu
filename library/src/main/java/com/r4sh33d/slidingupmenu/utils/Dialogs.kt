@@ -110,7 +110,7 @@ internal fun SlidingUpMenu.font(
     }
 }
 
-private fun safeGetFont(context: Context, @FontRes res: Int): Typeface? {
+internal fun safeGetFont(context: Context, @FontRes res: Int): Typeface? {
     return try {
         ResourcesCompat.getFont(context, res)
     } catch (e: Throwable) {
@@ -141,7 +141,7 @@ internal fun Int.adjustAlpha(alpha: Float): Int {
 
 /** @author Aidan Follestad (@afollestad) */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun SlidingUpMenu.getItemSelector(): Drawable? {
+internal fun SlidingUpMenu.getItemSelector(): Drawable? {
     val drawable = resolveDrawable(context = context, attr = R.attr.sm_item_selector)
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP && drawable is RippleDrawable) {
         resolveColor(attr = R.attr.sm_ripple_color).ifNotZero {
