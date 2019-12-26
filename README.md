@@ -14,7 +14,7 @@ A library that allows you to present menu items (from menu resource and/or other
 Add the dependency to your app's `build.gradle`:
 
 ```groovy
-implementation 'com.r4sh33d:SlidingUpMenu:0.0.1'
+implementation 'com.r4sh33d:SlidingUpMenu:0.0.2'
 ```
 ## Usage
 
