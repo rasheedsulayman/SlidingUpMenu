@@ -1,6 +1,6 @@
 /**
  * Designed and developed by Aidan Follestad (@afollestad)
- * Modified by Rasheed Sulayman (@r4sh33d) for use in SlidingUpMenu
+ * Modified by Rasheed Sulayman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
